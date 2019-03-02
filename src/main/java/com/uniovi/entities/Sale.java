@@ -28,7 +28,7 @@ public class Sale {
 	private User buyer;
 	
 	@OneToMany(mappedBy = "sale")
-	private Set<Sale> messages = new HashSet<>();
+	private Set<Message> messages = new HashSet<>();
 	
 	public Sale() {
 		this.status = SaleStatus.ONSALE;
@@ -90,11 +90,11 @@ public class Sale {
 		this.buyer = buyer;
 	}
 
-	public Set<Sale> getMessages() {
+	public Set<Message> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(Set<Sale> messages) {
+	public void setMessages(Set<Message> messages) {
 		this.messages = messages;
 	}
 

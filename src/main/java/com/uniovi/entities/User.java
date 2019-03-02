@@ -33,10 +33,10 @@ public class User {
 	private Set<Sale> boughtSales = new HashSet<>();
 
 	@OneToMany(mappedBy = "sender")
-	private Set<Sale> sentSales = new HashSet<>();
+	private Set<Message> sentMessages = new HashSet<>();
 
 	@OneToMany(mappedBy = "receiver")
-	private Set<Sale> receivedSales = new HashSet<>();
+	private Set<Message> receivedMessages = new HashSet<>();
 
 	public User() {
 		this.active = true;
@@ -122,20 +122,20 @@ public class User {
 		this.boughtSales = boughtSales;
 	}
 
-	public Set<Sale> getSentSales() {
-		return sentSales;
+	public Set<Message> getSentMessages() {
+		return sentMessages;
 	}
 
-	public void setSentSales(Set<Sale> sentSales) {
-		this.sentSales = sentSales;
+	public void setSentMessages(Set<Message> sentMessages) {
+		this.sentMessages = sentMessages;
 	}
 
-	public Set<Sale> getReceivedSales() {
-		return receivedSales;
+	public Set<Message> getReceivedMessages() {
+		return receivedMessages;
 	}
 
-	public void setReceivedSales(Set<Sale> receivedSales) {
-		this.receivedSales = receivedSales;
+	public void setReceivedMessages(Set<Message> receivedMessages) {
+		this.receivedMessages = receivedMessages;
 	}
 
 	public Long getId() {
@@ -175,13 +175,12 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", surname=" + surname 
-				+ ", email=" + email + ", password="
-				+ password + ", repassword=" + repassword + ", money=" + money 
-				+ ", active=" + active
-				+ ", publishedSales=" + publishedSales + ", boughtSales=" + 
-				boughtSales + ", sentSales=" + sentSales
-				+ ", receivedSales=" + receivedSales + "]";
+		return "User [id=" + id + ", name=" + name + ", surname=" 
+				+ surname + ", email=" + email + ", password="
+				+ password + ", repassword=" + repassword + 
+				", money=" + money + ", rol=" + rol + ", active=" + active
+				+ ", publishedSales=" + publishedSales + ", boughtSales=" 
+				+ boughtSales + ", sentMessages="
+				+ sentMessages + ", receivedMessages=" + receivedMessages + "]";
 	}
-
 }
