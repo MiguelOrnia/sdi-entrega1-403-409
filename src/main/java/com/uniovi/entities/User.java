@@ -42,6 +42,14 @@ public class User {
 		this.active = true;
 	}
 
+	public User(String email, String name, String surname, Rol role) {
+		this();
+		setEmail(email);
+		setName(name);
+		setSurname(surname);
+		setRol(role);
+	}
+
 	public String getName() {
 		return name;
 	}

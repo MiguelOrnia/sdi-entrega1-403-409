@@ -49,6 +49,16 @@ public class UserController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User activeUser = userService.getUserByEmail(email);
-		return "home";
+		if(activeUser.getRol().equals(Rol.ADMIN)){
+			return "homeAdmin";
+		}
+		return "homeStandard";
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) {
+		return "login";
+	}
+	
+	
 }
