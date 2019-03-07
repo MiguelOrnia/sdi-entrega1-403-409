@@ -3,7 +3,7 @@ package com.uniovi.entities;
 import java.util.*;
 import javax.persistence.*;
 
-import com.uniovi.entities.types.Rol;
+import com.uniovi.entities.types.Role;
 
 @Entity
 public class User {
@@ -23,7 +23,7 @@ public class User {
 	private double money;
 
 	@Enumerated(EnumType.STRING)
-	private Rol rol;
+	private Role role;
 	private boolean active;
 
 	@OneToMany(mappedBy = "owner")
@@ -39,15 +39,16 @@ public class User {
 	private Set<Message> receivedMessages = new HashSet<>();
 
 	public User() {
-		this.active = true;
+		setActive(true);
+		setMoney(100);
 	}
 
-	public User(String email, String name, String surname, Rol role) {
+	public User(String email, String name, String surname, Role role) {
 		this();
 		setEmail(email);
 		setName(name);
 		setSurname(surname);
-		setRol(role);
+		setRole(role);
 	}
 
 	public String getName() {
@@ -98,12 +99,12 @@ public class User {
 		this.money = money;
 	}
 
-	public Rol getRol() {
-		return rol;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRol(Rol rol) {
-		this.rol = rol;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public boolean isActive() {
@@ -186,7 +187,7 @@ public class User {
 		return "User [id=" + id + ", name=" + name + ", surname=" 
 				+ surname + ", email=" + email + ", password="
 				+ password + ", repassword=" + repassword + 
-				", money=" + money + ", rol=" + rol + ", active=" + active
+				", money=" + money + ", role=" + role + ", active=" + active
 				+ ", publishedSales=" + publishedSales + ", boughtSales=" 
 				+ boughtSales + ", sentMessages="
 				+ sentMessages + ", receivedMessages=" + receivedMessages + "]";

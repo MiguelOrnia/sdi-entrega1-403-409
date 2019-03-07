@@ -1,7 +1,7 @@
 package com.uniovi.validators;
 
 import com.uniovi.entities.User;
-import com.uniovi.services.UserService;
+import com.uniovi.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.*;
@@ -10,7 +10,7 @@ import org.springframework.validation.*;
 public class SignUpFormValidator implements Validator {
 	
 	@Autowired
-	private UserService userService;
+	private UsersService userService;
 
 	@Override
 	public boolean supports(Class<?> aClass) {
