@@ -27,6 +27,16 @@ public class UsersService {
 		return users;
 	}
 
+	public List<User> getValidUsers() {
+		List<User> users = new ArrayList<User>();
+		for (User user : usersRepository.findAllActive()) {
+			if(user.isActive()) {
+				users.add(user);
+			}
+		}
+		return users;
+	}
+	
 	public User getUser(Long id) {
 		return usersRepository.findById(id).get();
 	}
@@ -37,7 +47,9 @@ public class UsersService {
 	}
 
 	public void deleteUser(Long id) {
-		usersRepository.deleteById(id);
+		User user = usersRepository.findById(id).get();
+		user.setActive(false);
+		usersRepository.save(user);
 	}
 
 	public User getUserByEmail(String email) {

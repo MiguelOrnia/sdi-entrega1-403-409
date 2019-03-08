@@ -1,5 +1,6 @@
 package com.uniovi.controllers;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,21 +50,33 @@ public class UsersController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
-		model.addAttribute("money", activeUser.getMoney());
-		if(activeUser.getRole().equals(Role.ROLE_ADMIN)){
-			return "homeAdmin";
-		}
-		return "homeStandard";
+		if (activeUser.isActive()) {
+			model.addAttribute("money", activeUser.getMoney());
+			if (activeUser.getRole().equals(Role.ROLE_ADMIN)) {
+				return "homeAdmin";
+			}
+			return "homeStandard";
+		} 
+		SecurityContextHolder.getContext().setAuthentication(null);
+		return "redirect:login";
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		return "login";
 	}
-	
+
 	@RequestMapping("/user/list")
 	public String getListado(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
+		model.addAttribute("usersList", usersService.getValidUsers());
 		return "user/list";
+	}
+
+	@PostMapping("/user/delete")
+	public String delete(@RequestParam(value = "ck") List<Long> values) {
+		for (Long value : values) {
+			usersService.deleteUser(value);
+		}
+		return "redirect:/user/list";
 	}
 }

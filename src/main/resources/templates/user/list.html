@@ -4,7 +4,7 @@
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
-	<div class="container">
+	<form class="container" method="post"  action="/user/delete">
 		<h2>Usuarios</h2>
 		<p>Los usuarios que actualmente figuran en el sistema son los
 			siguientes:</p>
@@ -15,6 +15,7 @@
 						<th>Email</th>
 						<th>Nombre</th>
 						<th>Apellidos</th>
+						<th>Borrar</th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
@@ -27,11 +28,13 @@
 						<td th:text="${user.email}">user@email.com</td>
 						<td th:text="${user.name}">Nombre del usuario</td>
 						<td th:text="${user.surname}">Apellidos del usuario</td>
+						<td><input type="checkbox" name="ck" th:value="${user.id}"/></td>
 					</tr>
 				</tbody>
 			</table>
+			<button type="submit" class="btn btn-primary">Eliminar</button> 
 		</div>
-	</div>
+	</form>
 	<footer th:replace="fragments/footer" />
 </body>
 </html>
