@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.uniovi.entities.*;
 import com.uniovi.entities.types.Role;
+import com.uniovi.services.SaleService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UsersService;
 import com.uniovi.validators.SignUpFormValidator;
@@ -20,6 +21,9 @@ public class UsersController {
 
 	@Autowired
 	private UsersService usersService;
+	
+	@Autowired
+	private SaleService saleService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -55,6 +59,7 @@ public class UsersController {
 			if (activeUser.getRole().equals(Role.ROLE_ADMIN)) {
 				return "homeAdmin";
 			}
+			model.addAttribute("salesList", saleService.getSalesByUser(activeUser));
 			return "homeStandard";
 		} 
 		SecurityContextHolder.getContext().setAuthentication(null);

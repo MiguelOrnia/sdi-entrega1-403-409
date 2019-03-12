@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+
+
+	<div class="container">
+		<h2 th:text="#{sales.list.head}">Mis ofertas</h2>
+		<div th:replace="fragments/salesTable"></div>
+	</div>
+
+</body>
+</html>

@@ -26,7 +26,6 @@ public class SalesController {
 	@RequestMapping("/sales/add")
 	public String addSale() {
 		return "sales/add";
-		
 	}
 	
 	@RequestMapping(value = "/sales/add", method = RequestMethod.POST)
@@ -38,6 +37,14 @@ public class SalesController {
 		model.addAttribute("success", "");
 		model.addAttribute("addedSaleTitle", sale.getTitle());
 		return "sales/add";
-		
+	}
+	
+	@RequestMapping("/sales/list")
+	public String listSales(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User activeUser = usersService.getUserByEmail(email);
+		model.addAttribute("salesList", saleService.getSalesByUser(activeUser));
+		return "sales/list";
 	}
 }

@@ -1,5 +1,7 @@
 package com.uniovi.services;
 
+import java.util.List;
+
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +21,9 @@ public class SaleService  {
 		sale.setOwner(activeUser);
 		sale.setCreationDate(LocalDateTime.now());
 		saleRepository.save(sale);
+	}
+	
+	public List<Sale> getSalesByUser(User user){
+		return saleRepository.findAllByUser(user);
 	}
 }
