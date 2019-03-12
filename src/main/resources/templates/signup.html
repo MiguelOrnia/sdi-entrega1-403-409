@@ -1,61 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head th:replace="fragments/head_bs4" />
 <body>
-	<!-- Barra de Navegación superior -->
-	<nav th:replace="fragments/nav" />
-	<div class="container">
-		<h2>Registrate como usuario</h2>
-		<form class="form-horizontal" method="post" action="/signup" th:object="${user}">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="email">Email:</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="email"
+	<nav th:replace="fragments/nav_bs4"/>
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+		
+			<!-- Tabs Titles -->
+			<h2>Registrate como usuario</h2>
+
+			<!-- Login Form -->
+			<form method="post" action="/signup" th:object="${user}">
+				
+				<input type="text" class="fadeIn second" name="email"
 						placeholder="usuario@gmail.com" required="true" /> 
-					<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
-				</div>
-			</div>
-			<div class="form-group">
+				<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
+				
 				<label class="control-label col-sm-2" for="name">Nombre:</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="name"
+				<input type="text" class="fadeIn second" name="name"
 						placeholder="Ejemplo: Juan" required="true" /> 
-						<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="lastName">Apellidos:</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="surname"
-						placeholder="Ejemplo: Peréz Almonte" required="true" /> <span
-						class="text-danger" th:if="${#fields.hasErrors('surname')}"
-						th:errors="*{surname}" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="password">Password:</label>
-				<div class="col-sm-10">
-					<input type="password" class="form-control" name="password"
+				<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+				
+				<input type="text" class="fadeIn second" name="surname"
+						placeholder="Ejemplo: Peréz Almonte" required="true" />
+				<span class="text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" />
+				
+				<input type="password" class="fadeIn third" name="password"
 						placeholder="Entre el Password" /> <span class="text-danger"
 						th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="repassword">Repita
-					el Password:</label>
-				<div class="col-sm-10">
-					<input type="password" class="form-control" name="repassword"
+				
+				<input type="password" class="fadeIn third" name="repassword"
 						placeholder="Repita el Password" /> <span class="text-danger"
 						th:if="${#fields.hasErrors('repassword')}"
 						th:errors="*{repassword}" />
-				</div>
+						
+				<input type="submit" class="fadeIn fourth" th:value="#{signup.message}">
+			
+			</form>
+
+			<!-- Remind Passowrd -->
+			<div id="formFooter">
+				<a class="underlineHover" href="/login">Registrado? Entra</a>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Enviar</button>
-				</div>
-			</div>
-		</form>
+
+		</div>
 	</div>
 </body>
 </html>

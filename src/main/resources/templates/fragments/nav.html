@@ -1,5 +1,5 @@
 <!-- nav.html -->
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
 	<div class="collapse navbar-collapse" id="myNavbar">
 		<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 			<li><a href="/">Home</a></li>
@@ -25,7 +25,8 @@
 
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown"><a id="btnLanguage" href="#"
+			<li class="dropdown">
+			<a id="btnLanguage" href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> <span
 					th:text="#{language.change}"></span> <span class="caret"></span>
@@ -41,7 +42,8 @@
 							style="border: 0; float: left; margin-right: 15px" /> <span
 							th:text="#{language.es}">Español</span>
 					</a></li>
-				</ul></li>
+				</ul>
+				</li>
 			<li sec:authorize="!isAuthenticated()"><a href="/signup"
 				th:text="#{signup.message}"> <span
 					class="glyphicon glyphicon-user"></span> Registrate
