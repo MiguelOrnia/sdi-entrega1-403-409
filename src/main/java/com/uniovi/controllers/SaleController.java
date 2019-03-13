@@ -22,7 +22,7 @@ import com.uniovi.services.SaleService;
 import com.uniovi.services.UsersService;
 
 @Controller
-public class SalesController {
+public class SaleController {
 
 	@Autowired
 	private SaleService saleService;
@@ -84,5 +84,13 @@ public class SalesController {
 			return "redirect:/home?success";
 		}
 		return "redirect:/home?error";
+	}
+	
+	@GetMapping("/sales/purchased")
+	public String purchased(Model model, Principal principal) {
+		User user = usersService.findByEmail(principal.getName());
+		model.addAttribute("sales", saleService.findByBuyerId(user.getId()));
+		return "sales/purchased";
+
 	}
 }

@@ -19,4 +19,6 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 	@Query("SELECT s FROM Sale s WHERE s.title LIKE %?1% " + "AND s.status = 'HIGHLIGHTED' " + "OR s.title LIKE %?1% "
 			+ "AND s.status = 'ONSALE' ")
 	Page<Sale> findToSellSearchText(Pageable pageable, String searchText);
+	
+	List<Sale> findByBuyerId(Long id);
 }

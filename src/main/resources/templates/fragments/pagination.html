@@ -2,7 +2,8 @@
 <div class="text-center">
 	<ul class="pagination pagination-centered">
 		<!-- Primera -->
-		<li class="page-item"><a class="page-link" th:href="@{'?page=0'}" th:text="#{pagination.first}"></a></li>
+		<li class="page-item"><a class="page-link" th:href="@{'?page=0'}"
+			th:text="#{pagination.first}"></a></li>
 
 		<!-- Anterior (si la hay ) -->
 		<li class="page-item" th:if='${page.getNumber()-1 >= 0}'><a
@@ -22,6 +23,15 @@
 
 		<!-- Última -->
 		<li class="page-item"><a class="page-link"
-			th:href="@{'?page='+${page.getTotalPages()-1}}" th:text="#{pagination.last}"></a></li>
+			th:href="@{'?page='+${page.getTotalPages()-1}}"
+			th:text="#{pagination.last}"></a></li>
 	</ul>
 </div>
+<script src="/script/pagination.js"></script>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	var limit = /[[${page.getTotalPages() - 1}]]/
+	1;
+	var pag = new Pagination(limit);
+	/*]]>*/
+</script>

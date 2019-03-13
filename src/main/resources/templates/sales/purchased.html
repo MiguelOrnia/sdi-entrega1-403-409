@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<main class="container" style="text-align: center">
+	<h1 th:text="#{sales.purchased.list}">Esta es una zona privada la
+		web</h1>
+	<div th:if="${param.success}"
+		class="alert alert-dismissible alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<strong th:text="#{delete.success}">Oh snap!</strong>
+	</div>
+	<div>
+		<table class="table table-hover">
+			<thead class="table-dark">
+				<tr>
+					<th scope="col" th:text="#{sales.add.title}">Column heading</th>
+					<th scope="col" th:text="#{sales.add.details}">Column heading</th>
+					<th scope="col" th:text="#{sales.add.price}">Price</th>
+					<th scope="col" th:text="#{sales.purchased.email}">Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="table-light" th:each="sale:${sales}">
+					<td th:text="${sale.title}">Column content</td>
+					<td th:text="${sale.details}">Column content</td>
+					<td th:text="${sale.price}">Column content</td>
+					<td th:text="${sale.owner.email}">Column content</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</main>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>
