@@ -41,23 +41,11 @@ public class SaleService {
 		return saleRepository.findToSell(pageable);
 	}
 
-	public Page<Sale> findToSellSearchText(Pageable pageable, String searchText) {
-		return saleRepository.findToSellSearchText(pageable, searchText);
-	}
+    public Page<Sale> findToSellSearchText(Pageable pageable, String searchText) {
+        return saleRepository.findToSellSearchText(pageable, searchText);
+    }
 
-	public Sale findById(Long id) {
-		return saleRepository.getOne(id);
-	}
-
-	public boolean buy(Sale sale, User user) {
-		if (sale.getPrice() <= user.getMoney()) {
-			sale.setBuyer(user);
-			sale.setStatus(SaleStatus.SOLD);
-			saleRepository.save(sale);
-			user.setMoney(user.getMoney() - sale.getPrice());
-			usersRepository.save(user);
-			return true;
-		}
-		return false;
+	public Sale getSaleById(Long id) {
+		return saleRepository.findById(id).get();
 	}
 }

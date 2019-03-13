@@ -4,13 +4,13 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container" style="text-align: center">
+
 		<h2 th:text="#{welcome.message}"></h2>
-		<h3>Esta es una zona privada de la web</h3>
-		<p> Usuario Autenticado como: <span sec:authentication="principal.username" 
-			th:inline="text"></span> </p>
-		<p>Dinero actual: <span th:text=${money}> </span> </p>
-		<p>Ofertas del usuario</p>
-		
+		<p th:text="#{home.authenticated}">Usuario Autenticado como:</p>
+		<span sec:authentication="principal.username" th:inline="text"></span>
+		<p th:text="#{home.money} + ' ' + ${money} +'€'">Dinero actual:</p>
+		<h4 th:text="#{home.sales}">Ofertas del usuario</h4>
+
 		<div th:replace="fragments/salesTable"></div>
 
 	</div>

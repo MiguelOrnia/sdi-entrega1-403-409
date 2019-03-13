@@ -35,8 +35,6 @@ public class User {
 	@OneToMany(mappedBy = "sender")
 	private Set<Message> sentMessages = new HashSet<>();
 
-	@OneToMany(mappedBy = "receiver")
-	private Set<Message> receivedMessages = new HashSet<>();
 
 	public User() {
 		setActive(true);
@@ -139,14 +137,6 @@ public class User {
 		this.sentMessages = sentMessages;
 	}
 
-	public Set<Message> getReceivedMessages() {
-		return receivedMessages;
-	}
-
-	public void setReceivedMessages(Set<Message> receivedMessages) {
-		this.receivedMessages = receivedMessages;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -190,6 +180,6 @@ public class User {
 				", money=" + money + ", role=" + role + ", active=" + active
 				+ ", publishedSales=" + publishedSales + ", boughtSales=" 
 				+ boughtSales + ", sentMessages="
-				+ sentMessages + ", receivedMessages=" + receivedMessages + "]";
+				+ sentMessages + "]";
 	}
 }

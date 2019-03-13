@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/custom.css" />
+	<link rel="stylesheet" href="/css/messages.css" />
+	<script src="/script/languages.js"></script>
+</head>
+<body>
+	<nav th:replace="fragments/nav"/>
+	<div class="bodyWrapper">
+		<div class="currentChat">
+			<div class="currentChatHeader">
+				<div class="currentChatImageWrapper">
+					<img src="/resources/modular2.svg" alt="" class="currentChatImage">
+				</div>
+				<div class="currentChatHeaderTitle">
+					<h3 th:text="${session.sale==null ? '' : session.sale.title}">Chat title</h3>
+				</div>
+			</div>
+			<div class="currentChatContent">
+			
+				<div th:each="message : ${currentChat}" class="message" th:classappend="${message.sender.equals(session.sale.owner)} ? received : sent ">
+					<div class="messageContent" th:text="${message.body}">Lorem, ipsum dolor sit amet
+					</div>
+					<div class="messageTime" th:text="${message.date}"></div>
+				</div>
+
+
+			</div>
+			<form action="/messages" method="post" class="currentChatInput">
+				<input type="text" name="body" id="inputMessage"> <input
+					type="submit" value="↩︎" id="submitMessage">
+			</form>
+
+		</div>
+
+	</div>
+</body>
+
+</html>

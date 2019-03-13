@@ -14,9 +14,6 @@ public class Message {
 	private User sender;
 	
 	@ManyToOne
-	private User receiver;
-	
-	@ManyToOne
 	private Sale sale;
 	
 	private String body;
@@ -37,13 +34,6 @@ public class Message {
 		this.sender = sender;
 	}
 
-	public User getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(User receiver) {
-		this.receiver = receiver;
-	}
 
 	public Sale getSale() {
 		return sale;
@@ -109,7 +99,7 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", sender=" + sender + ", "
-				+ "receiver=" + receiver + ", sale=" + sale + ", body="
+				 + ", sale=" + sale + ", body="
 				+ body + ", date=" + date + ", valid=" + valid + "]";
 	}
 }

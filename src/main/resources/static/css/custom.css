@@ -11,6 +11,10 @@ body {
 	margin-bottom: 60px;
 }
 
+.table > thead > tr > th { 
+	text-align: center;
+}
+	
 .signupWrapper {
 	display: flex;
 	flex-direction: column;
