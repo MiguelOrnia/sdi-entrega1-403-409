@@ -26,4 +26,8 @@ public class SaleService  {
 	public List<Sale> getSalesByUser(User user){
 		return saleRepository.findAllByUser(user);
 	}
+
+	public void deleteSale(Long id) {
+		saleRepository.deleteById(id);
+	}
 }

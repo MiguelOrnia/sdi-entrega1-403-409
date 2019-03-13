@@ -14,7 +14,7 @@
 				<td th:text="${sale.title}">1</td>
 				<td th:text="${sale.details}">Ejercicio 1</td>
 				<td th:text="${sale.price} + '€'">10</td>
-				<td>eliminar</td>
+				<td><a th:href="${'/sales/delete/' + sale.id}" th:text="#{sale.list.delete}">eliminar</a></td>
 			</tr>
 		</tbody>
 	</table>
