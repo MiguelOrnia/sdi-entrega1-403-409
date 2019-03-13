@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Sale;
@@ -30,4 +32,12 @@ public class SaleService  {
 	public void deleteSale(Long id) {
 		saleRepository.deleteById(id);
 	}
+	
+	public Page<Sale> findToSell(Pageable pageable) {
+        return saleRepository.findToSell(pageable);
+    }
+
+    public Page<Sale> findToSellSearchText(Pageable pageable, String searchText) {
+        return saleRepository.findToSellSearchText(pageable, searchText);
+    }
 }
