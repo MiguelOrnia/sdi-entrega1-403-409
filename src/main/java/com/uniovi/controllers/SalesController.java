@@ -1,5 +1,7 @@
 package com.uniovi.controllers;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,29 +23,29 @@ import com.uniovi.services.UsersService;
 
 @Controller
 public class SalesController {
-	
+
 	@Autowired
 	private SaleService saleService;
-	
+
 	@Autowired
 	private UsersService usersService;
-	
+
 	@RequestMapping("/sales/add")
 	public String addSale() {
 		return "sales/add";
 	}
-	
+
 	@RequestMapping(value = "/sales/add", method = RequestMethod.POST)
 	public String addSale(Model model, @ModelAttribute Sale sale) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
-		saleService.addSale(sale,activeUser);
+		saleService.addSale(sale, activeUser);
 		model.addAttribute("success", "");
 		model.addAttribute("addedSaleTitle", sale.getTitle());
 		return "sales/add";
 	}
-	
+
 	@RequestMapping("/sales/list")
 	public String listSales(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -52,13 +54,13 @@ public class SalesController {
 		model.addAttribute("salesList", saleService.getSalesByUser(activeUser));
 		return "sales/list";
 	}
-	
+
 	@RequestMapping("/sales/delete/{id}")
 	public String deleteMark(@PathVariable Long id) {
 		saleService.deleteSale(id);
 		return "redirect:/sales/list";
 	}
-	
+
 	private Page<Sale> getPageSales(Pageable pageable, String searchText) {
 		if (searchText != null && !searchText.isEmpty()) {
 			return saleService.findToSellSearchText(pageable, searchText);
@@ -72,5 +74,15 @@ public class SalesController {
 		model.addAttribute("page", salePage);
 		model.addAttribute("sales", salePage.getContent());
 		return "sales/search";
+	}
+
+	@GetMapping("/sales/buy/{id}")
+	public String buy(@PathVariable Long id, Principal principal) {
+		User user = usersService.findByEmail(principal.getName());
+		Sale sale = saleService.findById(id);
+		if (saleService.buy(sale, user)) {
+			return "redirect:/home?success";
+		}
+		return "redirect:/home?error";
 	}
 }
