@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -46,5 +47,11 @@ public class SalesController {
 		User activeUser = usersService.getUserByEmail(email);
 		model.addAttribute("salesList", saleService.getSalesByUser(activeUser));
 		return "sales/list";
+	}
+	
+	@RequestMapping("/sales/delete/{id}")
+	public String deleteMark(@PathVariable Long id) {
+		saleService.deleteSale(id);
+		return "redirect:/sales/list";
 	}
 }
