@@ -4,12 +4,11 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<main class="container" style="text-align: center">
-	<h1 th:text="#{sales.purchased.list}">Esta es una zona privada la
-		web</h1>
+	<h1 th:text="#{sales.purchased.list}"></h1>
 	<div th:if="${param.success}"
 		class="alert alert-dismissible alert-success">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		<strong th:text="#{delete.success}">Oh snap!</strong>
+		<strong th:text="#{delete.success}"></strong>
 	</div>
 	<div>
 		<table class="table table-hover">

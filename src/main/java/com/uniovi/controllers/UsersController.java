@@ -79,12 +79,16 @@ public class UsersController {
 		model.addAttribute("usersList", usersService.getValidUsers());
 		return "user/list";
 	}
-
+	
 	@PostMapping("/user/delete")
-	public String delete(@RequestParam(value = "ck") List<Long> values) {
-		for (Long value : values) {
-			usersService.deleteUser(value);
-		}
-		return "redirect:/user/list";
+	public String delete(@RequestParam(value = "ck", required = false) 
+		List<Long> values) {
+		if(values != null) {
+			for (Long value : values) {
+				usersService.deleteUser(value);
+			}
+			return "redirect:/user/list?success";
+		} 
+		return "redirect:/user/list?error";
 	}
 }

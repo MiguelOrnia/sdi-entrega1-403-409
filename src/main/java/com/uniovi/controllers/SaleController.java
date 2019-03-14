@@ -62,10 +62,13 @@ public class SaleController {
 	}
 
 	private Page<Sale> getPageSales(Pageable pageable, String searchText) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User activeUser = usersService.getUserByEmail(email);
 		if (searchText != null && !searchText.isEmpty()) {
 			return saleService.findToSellSearchText(pageable, searchText);
 		}
-		return saleService.findToSell(pageable);
+		return saleService.findToSell(pageable, activeUser.getId());
 	}
 
 	@GetMapping("/sales/search")
@@ -81,9 +84,9 @@ public class SaleController {
 		User user = usersService.findByEmail(principal.getName());
 		Sale sale = saleService.findById(id);
 		if (saleService.buy(sale, user)) {
-			return "redirect:/home?success";
+			return "redirect:/sales/search?success";
 		}
-		return "redirect:/home?error";
+		return "redirect:/sales/search?error";
 	}
 	
 	@GetMapping("/sales/purchased")

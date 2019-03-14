@@ -37,10 +37,10 @@ public class SaleService {
 		saleRepository.deleteById(id);
 	}
 
-	public Page<Sale> findToSell(Pageable pageable) {
-		return saleRepository.findToSell(pageable);
+	public Page<Sale> findToSell(Pageable pageable, Long id) {
+		return saleRepository.findToSell(pageable, id);
 	}
-
+	
     public Page<Sale> findToSellSearchText(Pageable pageable, String searchText) {
         return saleRepository.findToSellSearchText(pageable, searchText);
     }

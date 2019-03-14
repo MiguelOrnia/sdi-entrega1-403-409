@@ -33,6 +33,10 @@
                     <td>
                         <form method="get" th:attr="action=${'/sales/buy/' + sale.id}">
                             <input type="submit" class="btn btn-success" th:attr="value=#{sales.buy}"/>
+                            <div id="buyError" th:if="${param.error}" th:text=#{sale.buy.error}
+								class="alert alert-danger" role="alert">Buy error</div>
+							<div id="buySuccess" th:if="${success}!=null" th:text=#{sale.buy.success}
+								class="alert alert-success" role="alert">Buy error</div>
                         </form>
                     </td>
                 </tr>
