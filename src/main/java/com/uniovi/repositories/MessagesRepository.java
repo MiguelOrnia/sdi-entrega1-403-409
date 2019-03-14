@@ -11,7 +11,6 @@ import com.uniovi.entities.User;
 
 public interface MessagesRepository extends JpaRepository<Message, Long>{
 
-	@Query("SELECT m FROM Message m WHERE m.sender = ?1 AND m.sale=?2")
-	List<Message> findAllByUserAndSale(User user, Sale sale);
+	
 
 }

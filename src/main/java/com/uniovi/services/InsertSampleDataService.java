@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Sale;
 import com.uniovi.entities.User;
 import com.uniovi.entities.types.Role;
 
@@ -13,6 +14,8 @@ public class InsertSampleDataService {
 	
 	@Autowired
 	private UsersService usersService;
+	@Autowired
+	private SaleService saleService;
 
 	@PostConstruct
 	public void init() {
@@ -39,6 +42,15 @@ public class InsertSampleDataService {
 		usersService.addUser(user4);
 		usersService.addUser(user5);
 		usersService.addUser(user6);
+		
+		Sale s1 = new Sale("Vendo Ford Fiesta", "En perfecto estado", 4560.2);
+		saleService.addSale(s1, user1);
+		Sale s2 = new Sale("Vendo iPhone 4", "Con arañazos", 120);
+		saleService.addSale(s2, user1);
+		Sale s3 = new Sale("Vendo Play 3", "En perfecto estado", 80);
+		saleService.addSale(s3, user1);
+		
+		
 	}
 
 }

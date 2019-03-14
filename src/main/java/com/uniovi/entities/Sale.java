@@ -1,6 +1,7 @@
 package com.uniovi.entities;
 
-import java.util.*;
+import java.util.Set;
+
 import javax.persistence.*;
 import org.joda.time.LocalDateTime;
 
@@ -27,11 +28,18 @@ public class Sale {
 	@ManyToOne
 	private User buyer;
 	
-	@OneToMany(mappedBy = "sale")
-	private Set<Message> messages = new HashSet<>();
+	@OneToMany(mappedBy="sale")
+	private Set<Conversation> conversations;
 	
 	public Sale() {
 		this.status = SaleStatus.ONSALE;
+	}
+
+	public Sale(String title, String details, double price) {
+		super();
+		this.title = title;
+		this.details = details;
+		this.price = price;
 	}
 
 	public String getTitle() {
@@ -90,14 +98,6 @@ public class Sale {
 		this.buyer = buyer;
 	}
 
-	public Set<Message> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(Set<Message> messages) {
-		this.messages = messages;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -138,7 +138,15 @@ public class Sale {
 		return "Sale [id=" + id + ", title=" + title + ", details=" + details 
 				+ ", price=" + price + ", creationDate="
 				+ creationDate + ", owner=" + owner + ", buyer=" + buyer + ", "
-						+ "messages=" + messages + "]";
+						+ "]";
+	}
+
+	public Set<Conversation> getConversations() {
+		return conversations;
+	}
+
+	public void setConversations(Set<Conversation> conversations) {
+		this.conversations = conversations;
 	}
 	
 		

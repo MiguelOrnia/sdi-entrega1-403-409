@@ -17,15 +17,15 @@
 		<div class="currentChat">
 			<div class="currentChatHeader">
 				<div class="currentChatImageWrapper">
-					<img src="/resources/modular2.svg" alt="" class="currentChatImage">
+					<img src="/img/messages.svg" alt="" class="currentChatImage">
 				</div>
 				<div class="currentChatHeaderTitle">
-					<h3 th:text="${session.sale==null ? '' : session.sale.title}">Chat title</h3>
+					<h3 th:text="${session.sale==null ? 'Chat' : session.sale.title}">Chat title</h3>
 				</div>
 			</div>
 			<div class="currentChatContent">
 			
-				<div th:each="message : ${currentChat}" class="message" th:classappend="${message.sender.equals(session.sale.owner)} ? received : sent ">
+				<div th:each="message : ${messages}" class="message" th:classappend="${message.sender.equals(activeUser)} ? sent : received ">
 					<div class="messageContent" th:text="${message.body}">Lorem, ipsum dolor sit amet
 					</div>
 					<div class="messageTime" th:text="${message.date}"></div>

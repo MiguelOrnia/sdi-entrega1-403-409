@@ -34,6 +34,9 @@ public class User {
 
 	@OneToMany(mappedBy = "sender")
 	private Set<Message> sentMessages = new HashSet<>();
+	
+	@OneToMany(mappedBy = "customer")
+	private Set<Conversation> participates = new HashSet<>();
 
 
 	public User() {
@@ -181,5 +184,13 @@ public class User {
 				+ ", publishedSales=" + publishedSales + ", boughtSales=" 
 				+ boughtSales + ", sentMessages="
 				+ sentMessages + "]";
+	}
+
+	public Set<Conversation> getParticipates() {
+		return participates;
+	}
+
+	public void setParticipates(Set<Conversation> participates) {
+		this.participates = participates;
 	}
 }

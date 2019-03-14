@@ -1,6 +1,11 @@
 package com.uniovi.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import org.joda.time.LocalDateTime;
 
 @Entity
@@ -14,7 +19,7 @@ public class Message {
 	private User sender;
 	
 	@ManyToOne
-	private Sale sale;
+	private Conversation belongs;
 	
 	private String body;
 	
@@ -35,13 +40,7 @@ public class Message {
 	}
 
 
-	public Sale getSale() {
-		return sale;
-	}
-
-	public void setSale(Sale sale) {
-		this.sale = sale;
-	}
+	
 
 	public String getBody() {
 		return body;
@@ -69,6 +68,10 @@ public class Message {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void setBelongs(Conversation conversation) {
+		this.belongs = conversation;
 	}
 
 	@Override
@@ -99,7 +102,7 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", sender=" + sender + ", "
-				 + ", sale=" + sale + ", body="
+				 +  ", body="
 				+ body + ", date=" + date + ", valid=" + valid + "]";
 	}
 }
