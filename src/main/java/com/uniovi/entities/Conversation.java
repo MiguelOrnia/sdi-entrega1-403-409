@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Conversation {
 	@ManyToOne
 	private User customer;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="belongs")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="belongs",cascade=CascadeType.ALL)
 	private Set<Message> messages = new HashSet<>();
 	
 	@ManyToOne

@@ -17,6 +17,11 @@ h3 {
     margin: 0;
 }
 
+.deleteConversation {
+	margin: 0px 0px 0px 3em;
+	padding: 0.5em 1em;
+}
+
 .recentChatsWrapper{
     background-color: white;
     border-radius: 5px;
@@ -32,7 +37,7 @@ h3 {
 .recentChats {
     padding: 0 2em 2em;
     width: 50vw;
-    max-width: 30em;
+    max-width: 32em;
     overflow-x: hidden;
     overflow-y: scroll;
 }

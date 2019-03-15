@@ -21,12 +21,13 @@
 			<h3 th:text="#{messages.recents}">Recent Chats</h3>
 			<div class="recentChats">
 				<form action="/messages/delete" method="post">
-					<a th:each="conversation : ${conversations}"
-						th:href="${'/messages/' + conversation.id}">
-						<div class="chatCard">
+
+					<div class="chatCard" th:each="conversation : ${conversations}">
+						<a th:href="${'/messages/' + conversation.id}">
 							<div class="chatImage">
 								<img src="/img/chat.svg" alt="">
 							</div>
+						</a> <a th:href="${'/messages/' + conversation.id}">
 							<div class="chatInfo">
 								<div class="chatName"
 									th:text="${'RE: ' + conversation.sale.title}">Emilio
@@ -34,10 +35,11 @@
 								<div class="chatPreview" th:if="${conversation.sale!=null}"
 									th:text="#{messages.seller} +': '+ ${conversation.sale.owner.email}"></div>
 							</div>
-							<button class="deleteConversation" type="submit" th:text=#{delete.button}
-								th:value="${conversation.id}" name="id"></button>
-						</div>
-					</a>
+						</a>
+						<button class="deleteConversation" type="submit"
+							th:text=#{delete.button} th:value="${conversation.id}" name="id"></button>
+					</div>
+
 				</form>
 			</div>
 		</div>

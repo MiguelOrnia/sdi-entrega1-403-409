@@ -72,8 +72,10 @@ public class SaleController {
 	}
 
 	@GetMapping("/sales/search")
-	public String search(Model model, Pageable pageable, @RequestParam(required = false) String searchText) {
+	public String search(Model model, Pageable pageable, @RequestParam(required = false) String searchText, @RequestParam(required = false) Long error) {
 		Page<Sale> salePage = getPageSales(pageable, searchText);
+		if(error!=null)
+			model.addAttribute("error", error);
 		model.addAttribute("page", salePage);
 		model.addAttribute("sales", salePage.getContent());
 		model.addAttribute("searchText", searchText);
@@ -87,7 +89,7 @@ public class SaleController {
 		if (saleService.buy(sale, user)) {
 			return "redirect:/sales/search?success";
 		}
-		return "redirect:/sales/search?error";
+		return "redirect:/sales/search?error="+id;
 	}
 	
 	@GetMapping("/sales/purchased")
