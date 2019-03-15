@@ -76,6 +76,7 @@ public class SaleController {
 		Page<Sale> salePage = getPageSales(pageable, searchText);
 		model.addAttribute("page", salePage);
 		model.addAttribute("sales", salePage.getContent());
+		model.addAttribute("searchText", searchText);
 		return "sales/search";
 	}
 
