@@ -36,7 +36,7 @@ public class Sale {
 	}
 
 	public Sale(String title, String details, double price) {
-		super();
+		this();
 		this.title = title;
 		this.details = details;
 		this.price = price;
