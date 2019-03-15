@@ -6,25 +6,25 @@
 <body>
 	<nav th:replace="fragments/nav_bs4" />
 
-	<div class="wrapper fadeInDown">
+	<div class="wrapper">
 		<div id="formContent">
 			<!-- Tabs Titles -->
 
 			<!-- Icon -->
-			<div class="fadeIn first">
+			<div>
 				<img src="/img/myWallapop.svg" id="icon" alt="User Icon" />
 			</div>
 
 			<!-- Login Form -->
 			<form method="post" action="/login">
-				<input type="text" id="login" class="fadeIn second" name="username" th:placeholder="#{login.email}" required="true"> 
+				<input type="text" id="login"  name="username" th:placeholder="#{login.email}" required="true"> 
 				
-				<input type="password" id="password" class="fadeIn third" name="password" th:placeholder="#{login.password}" required="true"> 
+				<input type="password" id="password" name="password" th:placeholder="#{login.password}" required="true"> 
 				
 				<div id="loginError" th:if="${error}!=null" th:text=#{login.error}
 					class="alert alert-danger" role="alert">Login error</div>
 					
-				<input type="submit" class="fadeIn fourth" th:value="#{login.submit}">
+				<input type="submit"  th:value="#{login.submit}">
 			</form>
 
 			<!-- Remind Passowrd -->

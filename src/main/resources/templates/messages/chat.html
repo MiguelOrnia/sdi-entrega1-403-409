@@ -17,10 +17,10 @@
 		<div class="currentChat">
 			<div class="currentChatHeader">
 				<div class="currentChatImageWrapper">
-					<img src="/img/messages.svg" alt="" class="currentChatImage">
+					<img src="/img/contact.svg" alt="" class="currentChatImage">
 				</div>
 				<div class="currentChatHeaderTitle">
-					<h3 th:text="${session.sale==null ? 'Chat' : session.sale.title}">Chat title</h3>
+					<h3 th:text="${convTitle==null ? 'Chat' : convTitle}">Chat title</h3>
 				</div>
 			</div>
 			<div class="currentChatContent">

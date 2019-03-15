@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uniovi.entities.Conversation;
 import com.uniovi.entities.Message;
@@ -59,6 +61,7 @@ public class MessagesController {
 		if (chat != null) {
 			httpSession.setAttribute("currentChat", chat);
 			List<Message> messages = chat.getMessages();
+			model.addAttribute("convTitle", chat.getSale().getTitle());
 			model.addAttribute("messages", messages);
 			model.addAttribute("activeUser", activeUser);
 			return "messages/chat";
@@ -74,6 +77,7 @@ public class MessagesController {
 		Sale sale = salesService.findById(saleId);
 		if(sale!=null) {
 			Conversation chat = messagesService.getConversation(activeUser, sale);
+			model.addAttribute("convTitle", chat.getSale().getTitle());
 			httpSession.setAttribute("currentChat", chat);
 			model.addAttribute("activeUser", activeUser);
 			return "messages/chat";
@@ -97,6 +101,13 @@ public class MessagesController {
 			return "redirect:messages/" + chat.getId();
 		}
 		return "redirect:messages";
+	}
+	
+	@RequestMapping(value="/messages/delete", method = RequestMethod.POST)
+	public String delete(@RequestParam(value = "id", required = false) Long id){
+		messagesService.deleteConversation(id);
+		
+		return "redirect:/messages";
 	}
 
 }

@@ -55,5 +55,9 @@ public class MessagesService  {
 		return conversations;
 	}
 
+	public void deleteConversation(Long id) {
+		conversationsRepository.deleteById(id);
+	}
+
 	
 }
