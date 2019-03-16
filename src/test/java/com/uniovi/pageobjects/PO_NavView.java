@@ -44,6 +44,6 @@ public class PO_NavView extends PO_View {
 	
 	public static void checkIsUser(WebDriver driver) {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "users", getTimeout());
-		assertTrue(elementos.size() == 1);
+		assertTrue(elementos.size() == 2);
 	}
 }

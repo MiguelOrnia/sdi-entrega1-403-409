@@ -12,27 +12,27 @@
 			<!-- Login Form -->
 			<form method="post" action="/signup" th:object="${user}">
 				
-				<label class="control-label" for="email" th:text="#{signup.email}">Email:</label>
+				<label class="control-label" for="email" th:text="#{signup.email}"></label>
 				<input type="text" name="email"
 						placeholder="user@email.com" required="true" /> 
 				<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
 				
-				<label class="control-label" for="name" th:text="#{signup.name}">Nombre:</label>
+				<label class="control-label" for="name" th:text="#{signup.name}"></label>
 				<input type="text" name="name"
 						placeholder="Ejemplo: Juan" required="true" /> 
 				<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
 				
-				<label class="control-label" for="surname" th:text="#{signup.surname}">Apellidos:</label>
+				<label class="control-label" for="surname" th:text="#{signup.surname}"></label>
 				<input type="text" name="surname"
 						placeholder="Ejemplo: Peréz Almonte" required="true" />
 				<span class="text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" />
 				
-				<label class="control-label" for="password" th:text="#{signup.password}">Password:</label>
+				<label class="control-label" for="password" th:text="#{signup.password}"></label>
 				<input type="password" name="password"
 						placeholder="Entre el Password" /> <span class="text-danger"
 						th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
 				
-				<label class="control-label" for="repassword" th:text="#{signup.repassword}">Repite el password:</label>
+				<label class="control-label" for="repassword" th:text="#{signup.repassword}"></label>
 				<input type="password" name="repassword"
 						placeholder="Repita el Password" /> <span class="text-danger"
 						th:if="${#fields.hasErrors('repassword')}"
@@ -44,7 +44,7 @@
 
 			<!-- Remind Passowrd -->
 			<div id="formFooter">
-				<a class="underlineHover" href="/login" th:text="#{signup.login}">Registrado? Entra</a>
+				<a class="underlineHover" href="/login" th:text="#{signup.login}"></a>
 			</div>
 
 		</div>
