@@ -40,15 +40,16 @@ public class SaleService {
 	public Page<Sale> findToSell(Pageable pageable, Long id) {
 		return saleRepository.findToSell(pageable, id);
 	}
-	
-    public Page<Sale> findToSellSearchText(Pageable pageable, String searchText) {
-        return saleRepository.findToSellSearchText(pageable, searchText);
-    }
+
+	public Page<Sale> findToSellSearchText(Pageable pageable,
+			String searchText) {
+		return saleRepository.findToSellSearchText(pageable, searchText);
+	}
 
 	public Sale getSaleById(Long id) {
 		return saleRepository.findById(id).get();
 	}
-	
+
 	public Sale findById(Long id) {
 		return saleRepository.getOne(id);
 	}
@@ -64,8 +65,8 @@ public class SaleService {
 		}
 		return false;
 	}
-	
+
 	public List<Sale> findByBuyerId(Long id) {
-        return saleRepository.findByBuyerId(id);
-    }
+		return saleRepository.findByBuyerId(id);
+	}
 }

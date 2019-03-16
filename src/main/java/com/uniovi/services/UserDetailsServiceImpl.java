@@ -18,14 +18,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private UsersRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email)
+			throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(email);
 
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-		grantedAuthorities.add(new SimpleGrantedAuthority(String.valueOf(user.getRole())));
+		grantedAuthorities.add(
+				new SimpleGrantedAuthority(String.valueOf(user.getRole())));
 
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-				grantedAuthorities);
+		return new org.springframework.security.core.userdetails.User(
+				user.getEmail(), user.getPassword(), grantedAuthorities);
 	}
 }

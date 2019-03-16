@@ -19,7 +19,8 @@ public class SeleniumUtils {
 	 * @param texto: texto a buscar
 	 */
 	static public void textoPresentePagina(WebDriver driver, String texto) {
-		List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + texto + "')]"));
+		List<WebElement> list = driver.findElements(
+				By.xpath("//*[contains(text(),'" + texto + "')]"));
 		assertTrue("Texto " + texto + " no localizado!", list.size() > 0);
 	}
 
@@ -30,28 +31,32 @@ public class SeleniumUtils {
 	 * @param texto: texto a buscar
 	 */
 	static public void textoNoPresentePagina(WebDriver driver, String texto) {
-		List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + texto + "')]"));
+		List<WebElement> list = driver.findElements(
+				By.xpath("//*[contains(text(),'" + texto + "')]"));
 		assertTrue("Texto " + texto + " aun presente !", list.size() == 0);
 	}
 
 	/**
-	 * Aborta si el "texto" está presente en la página actual tras timeout segundos.
+	 * Aborta si el "texto" está presente en la página actual tras timeout
+	 * segundos.
 	 * 
 	 * @param driver: apuntando al navegador abierto actualmente.
 	 * @param texto: texto a buscar
-	 * @param timeout: el tiempo máximo que se esperará por la aparición del texto a
-	 *        buscar
+	 * @param timeout: el tiempo máximo que se esperará por la aparición del
+	 *        texto a buscar
 	 */
-	static public void EsperaCargaPaginaNoTexto(WebDriver driver, String texto, int timeout) {
-		Boolean resultado = (new WebDriverWait(driver, timeout)).until(
-				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + texto + "')]")));
+	static public void EsperaCargaPaginaNoTexto(WebDriver driver, String texto,
+			int timeout) {
+		Boolean resultado = (new WebDriverWait(driver, timeout))
+				.until(ExpectedConditions.invisibilityOfElementLocated(
+						By.xpath("//*[contains(text(),'" + texto + "')]")));
 
 		assertTrue(resultado);
 	}
 
 	/**
-	 * Espera por la visibilidad de un elemento/s en la vista actualmente cargandose
-	 * en driver. Para ello se empleará una consulta xpath.
+	 * Espera por la visibilidad de un elemento/s en la vista actualmente
+	 * cargandose en driver. Para ello se empleará una consulta xpath.
 	 * 
 	 * @param driver: apuntando al navegador abierto actualmente.
 	 * @param xpath: consulta xpath.
@@ -60,9 +65,10 @@ public class SeleniumUtils {
 	 * @return Se retornará la lista de elementos resultantes de la búsqueda con
 	 *         xpath.
 	 */
-	static public List<WebElement> EsperaCargaPaginaxpath(WebDriver driver, String xpath, int timeout) {
-		WebElement resultado = (new WebDriverWait(driver, timeout))
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+	static public List<WebElement> EsperaCargaPaginaxpath(WebDriver driver,
+			String xpath, int timeout) {
+		WebElement resultado = (new WebDriverWait(driver, timeout)).until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 		assertTrue(resultado != null);
 		List<WebElement> elementos = driver.findElements(By.xpath(xpath));
 
@@ -70,18 +76,20 @@ public class SeleniumUtils {
 	}
 
 	/**
-	 * Espera por la visibilidad de un elemento/s en la vista actualmente cargandose
-	 * en driver. Para ello se empleará una consulta xpath según varios criterios..
+	 * Espera por la visibilidad de un elemento/s en la vista actualmente
+	 * cargandose en driver. Para ello se empleará una consulta xpath según
+	 * varios criterios..
 	 * 
 	 * @param driver: apuntando al navegador abierto actualmente.
-	 * @param criterio: "id" or "class" or "text" or "@attribute" or "free". Si el
-	 *        valor de criterio es free es una expresion xpath completa.
+	 * @param criterio: "id" or "class" or "text" or "@attribute" or "free". Si
+	 *        el valor de criterio es free es una expresion xpath completa.
 	 * @param text: texto correspondiente al criterio.
 	 * @param timeout: el tiempo máximo que se esperará por la apareción del
 	 *        elemento a buscar con criterio/text.
 	 * @return Se retornará la lista de elementos resultantes de la búsqueda.
 	 */
-	static public List<WebElement> EsperaCargaPagina(WebDriver driver, String criterio, String text, int timeout) {
+	static public List<WebElement> EsperaCargaPagina(WebDriver driver,
+			String criterio, String text, int timeout) {
 		String busqueda;
 		if (criterio.equals("id"))
 			busqueda = "//*[contains(@id,'" + text + "')]";
@@ -98,8 +106,8 @@ public class SeleniumUtils {
 	}
 
 	/**
-	 * PROHIBIDO USARLO PARA VERSIÓN FINAL. Esperar "segundos" durante la ejecucion
-	 * del navegador
+	 * PROHIBIDO USARLO PARA VERSIÓN FINAL. Esperar "segundos" durante la
+	 * ejecucion del navegador
 	 * 
 	 * @param driver: apuntando al navegador abierto actualmente.
 	 * @param segundos: Segundos de bloqueo de la ejecución en el navegador.

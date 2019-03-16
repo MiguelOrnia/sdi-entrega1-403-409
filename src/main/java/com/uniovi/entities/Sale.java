@@ -13,26 +13,28 @@ public class Sale {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String title;
 	private String details;
 	private double price;
 	private LocalDateTime creationDate;
-	
+	private boolean active;
+
 	@Enumerated(EnumType.STRING)
 	private SaleStatus status;
-	
+
 	@ManyToOne
 	private User owner;
-	
+
 	@ManyToOne
 	private User buyer;
-	
-	@OneToMany(mappedBy="sale")
+
+	@OneToMany(mappedBy = "sale")
 	private Set<Conversation> conversations;
-	
+
 	public Sale() {
 		this.status = SaleStatus.ONSALE;
+		this.active = true;
 	}
 
 	public Sale(String title, String details, double price) {
@@ -102,11 +104,20 @@ public class Sale {
 		return id;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result
+				+ ((creationDate == null) ? 0 : creationDate.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -135,10 +146,11 @@ public class Sale {
 
 	@Override
 	public String toString() {
-		return "Sale [id=" + id + ", title=" + title + ", details=" + details 
-				+ ", price=" + price + ", creationDate="
-				+ creationDate + ", owner=" + owner + ", buyer=" + buyer + ", "
-						+ "]";
+		return "Sale [id=" + id + ", title=" + title + ", details=" + details
+				+ ", price=" + price + ", creationDate=" + creationDate
+				+ ", active=" + active + ", status=" + status + ", owner="
+				+ owner + ", buyer=" + buyer + ", conversations="
+				+ conversations + "]";
 	}
 
 	public Set<Conversation> getConversations() {
@@ -148,6 +160,5 @@ public class Sale {
 	public void setConversations(Set<Conversation> conversations) {
 		this.conversations = conversations;
 	}
-	
-		
+
 }

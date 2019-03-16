@@ -10,16 +10,18 @@ import com.uniovi.entities.User;
 
 public interface SaleRepository extends JpaRepository<Sale, Long> {
 
-	@Query("SELECT s FROM Sale s WHERE s.owner = ?1 ORDER BY s.id ASC ")
+	@Query("SELECT s FROM Sale s WHERE s.owner = ?1 AND s.active = true "
+			+ "ORDER BY s.id ASC ")
 	List<Sale> findAllByUser(User user);
 
 	@Query("SELECT s FROM Sale s WHERE (s.status ='ONSALE' OR "
-			+ "s.status='HIGHLIGHTED') AND s.owner.id != ?1")
-	Page<Sale> findToSell (Pageable pageable, Long id);
+			+ "s.status='HIGHLIGHTED') AND s.owner.id != ?1 AND s.active = true")
+	Page<Sale> findToSell(Pageable pageable, Long id);
 
-	@Query("SELECT s FROM Sale s WHERE s.title LIKE %?1% " + "AND s.status = 'HIGHLIGHTED' " + "OR s.title LIKE %?1% "
-			+ "AND s.status = 'ONSALE' ")
+	@Query("SELECT s FROM Sale s WHERE s.title LIKE %?1% "
+			+ "AND s.status = 'HIGHLIGHTED' " + "OR s.title LIKE %?1% "
+			+ "AND s.status = 'ONSALE' AND s.active = true")
 	Page<Sale> findToSellSearchText(Pageable pageable, String searchText);
-	
+
 	List<Sale> findByBuyerId(Long id);
 }

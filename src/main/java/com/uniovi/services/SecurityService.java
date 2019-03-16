@@ -19,10 +19,12 @@ public class SecurityService {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-	private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(SecurityService.class);
 
 	public String findLoggedInEmail() {
-		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+		Object userDetails = SecurityContextHolder.getContext()
+				.getAuthentication().getDetails();
 		if (userDetails instanceof UserDetails) {
 			return ((UserDetails) userDetails).getUsername();
 		}
@@ -32,8 +34,9 @@ public class SecurityService {
 	public void autoLogin(String email, String password) {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-		UsernamePasswordAuthenticationToken aToken = new UsernamePasswordAuthenticationToken(userDetails, password,
-				userDetails.getAuthorities());
+		UsernamePasswordAuthenticationToken aToken = 
+				new UsernamePasswordAuthenticationToken(
+				userDetails, password, userDetails.getAuthorities());
 		authenticationManager.authenticate(aToken);
 		if (aToken.isAuthenticated()) {
 			SecurityContextHolder.getContext().setAuthentication(aToken);

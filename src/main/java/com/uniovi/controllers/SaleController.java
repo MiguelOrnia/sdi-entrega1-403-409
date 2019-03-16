@@ -37,7 +37,8 @@ public class SaleController {
 
 	@RequestMapping(value = "/sales/add", method = RequestMethod.POST)
 	public String addSale(Model model, @ModelAttribute Sale sale) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
 		saleService.addSale(sale, activeUser);
@@ -48,7 +49,8 @@ public class SaleController {
 
 	@RequestMapping("/sales/list")
 	public String listSales(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
 		model.addAttribute("salesList", saleService.getSalesByUser(activeUser));
@@ -62,7 +64,8 @@ public class SaleController {
 	}
 
 	private Page<Sale> getPageSales(Pageable pageable, String searchText) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
 		if (searchText != null && !searchText.isEmpty()) {
@@ -72,12 +75,14 @@ public class SaleController {
 	}
 
 	@GetMapping("/sales/search")
-	public String search(Model model, Pageable pageable, @RequestParam(required = false) String searchText, @RequestParam(required = false) Long error) {
+	public String search(Model model, Pageable pageable,
+			@RequestParam(required = false) String searchText,
+			@RequestParam(required = false) Long error) {
 		Page<Sale> salePage = getPageSales(pageable, searchText);
 		if (searchText == null) {
-            searchText = "";
+			searchText = "";
 		}
-		if(error!=null) {
+		if (error != null) {
 			model.addAttribute("error", error);
 		}
 		model.addAttribute("page", salePage);
@@ -93,9 +98,9 @@ public class SaleController {
 		if (saleService.buy(sale, user)) {
 			return "redirect:/sales/search?success";
 		}
-		return "redirect:/sales/search?error="+id;
+		return "redirect:/sales/search?error=" + id;
 	}
-	
+
 	@GetMapping("/sales/purchased")
 	public String purchased(Model model, Principal principal) {
 		User user = usersService.findByEmail(principal.getName());

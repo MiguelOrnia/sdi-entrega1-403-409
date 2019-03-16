@@ -48,8 +48,10 @@ public class SdiEntrega1403409ApplicationTests {
 	private SaleRepository saleRepository;
 
 	// Mi Path
-	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\PL-SDI-Sesion5-material\\geckodriver024win64.exe";
+	static String PathFirefox65 = "C:\\Program Files (x86)\\"
+			+ "Mozilla Firefox\\firefox.exe";
+	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\"
+			+ "PL-SDI-Sesion5-material\\geckodriver024win64.exe";
 
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URL = "http://localhost:8090";
@@ -261,8 +263,7 @@ public class SdiEntrega1403409ApplicationTests {
 	@Test
 	public void PR08() {
 		// Rellenamos el formulario
-		PO_LoginView.fillForm(driver, "miguel@email.com",
-				"123456789");
+		PO_LoginView.fillForm(driver, "miguel@email.com", "123456789");
 		// Comprobamos que el error existe
 		PO_LoginView.checkKey(driver, "login.error",
 				PO_Properties.getSPANISH());
@@ -279,19 +280,20 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-//	// PR10. Hacer click en la opción de salir de sesión y comprobar que se
-//	// redirige
-//	// a la página de inicio de sesión (Login).
-//	@Test
-//	public void PR10() {
-//		// Rellenamos el formulario
-//		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
-//		// Salimos de sesión
-//		PO_NavView.clickOption(driver, "logout", "class", "desconectarse");
-//		// Comprobamos que entramos en la página de login
-//		PO_LoginView.checkKey(driver, "login.message", 
-//				PO_Properties.getSPANISH());
-//	}
+	// PR10. Hacer click en la opción de salir de sesión y comprobar que se
+	// redirige
+	// a la página de inicio de sesión (Login).
+	@Test
+	public void PR10() {
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		// Salimos de sesión
+		List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'desconexion')]/a");
+		elementos.get(0).click();
+		// Comprobamos que entramos en la página de login
+		PO_LoginView.checkElement(driver, "id", "login");
+	}
 
 	// PR11. Comprobar que el botón cerrar sesión no está visible si el usuario
 	// no
@@ -566,7 +568,25 @@ public class SdiEntrega1403409ApplicationTests {
 	// PR27. Internalización
 	@Test
 	public void PR27() {
-
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		// Comprobamos las vistas de las paginas
+		PO_HomeView.goToPage(driver);
+		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+		PO_NavView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+		PO_AddSale.goToPage(driver);
+		PO_AddSale.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+		// Como admin
+		List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'desconexion')]/a");
+		elementos.get(0).click();
+		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_UserList.goToPage(driver);
+		PO_UserList.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
 	}
 
 	// PR28. Intentar acceder sin estar autenticado a la opción de listado de
@@ -592,16 +612,16 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_LoginView.checkElement(driver, "id", "login");
 	}
 
-//	// PR30. Estando autenticado como usuario estándar intentar acceder a la opción
+//	// PR30. Estando autenticado como usuario estándar intentar acceder a la
+//	// opción
 //	// de listado de usuarios del administrador. Se deberá indicar un mensaje de
 //	// acción prohibida.
 //	@Test
 //	public void PR30() {
 //		// Rellenamos el formulario
 //		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
-//		// Salimos de sesión
 //		driver.navigate().to(URL + "/user/list/");
-//		// Comprobamos que entramos en la página de login
-//		PO_LoginView.checkKey(driver, "error.notAuthorized", PO_Properties.getSPANISH());
+//		PO_LoginView.checkKey(driver, "error.notAuthorized",
+//				PO_Properties.getSPANISH());
 //	}
 }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,17 +41,20 @@ public class MessagesController {
 
 	@RequestMapping("/messages")
 	public String getMessages(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
-		
-		model.addAttribute("conversations", messagesService.getConversations(activeUser));
+
+		model.addAttribute("conversations",
+				messagesService.getConversations(activeUser));
 		return "messages/messages";
 	}
 
 	@RequestMapping("/messages/{convId}")
 	public String getMessages(Model model, @PathVariable Long convId) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
 
@@ -68,30 +70,34 @@ public class MessagesController {
 		}
 		return "redirect:/messages";
 	}
-	
+
 	@RequestMapping("/sales/message/{saleId}")
 	public String getSaleMessage(Model model, @PathVariable Long saleId) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
 		Sale sale = salesService.findById(saleId);
-		if(sale!=null) {
-			Conversation chat = messagesService.getConversation(activeUser, sale);
+		if (sale != null) {
+			Conversation chat = messagesService.getConversation(activeUser,
+					sale);
 			model.addAttribute("convTitle", chat.getSale().getTitle());
 			httpSession.setAttribute("currentChat", chat);
 			model.addAttribute("activeUser", activeUser);
 			return "messages/chat";
 		}
-		
+
 		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/messages", method = RequestMethod.POST)
 	public String getMessages(@ModelAttribute Message message) {
-		Conversation chat = (Conversation) httpSession.getAttribute("currentChat");
+		Conversation chat = (Conversation) httpSession
+				.getAttribute("currentChat");
 		chat = messagesService.getConversation(chat.getId());
 		if (chat != null) {
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			Authentication auth = SecurityContextHolder.getContext()
+					.getAuthentication();
 			String email = auth.getName();
 			User sender = usersService.getUserByEmail(email);
 
@@ -102,11 +108,12 @@ public class MessagesController {
 		}
 		return "redirect:messages";
 	}
-	
-	@RequestMapping(value="/messages/delete", method = RequestMethod.POST)
-	public String delete(@RequestParam(value = "id", required = false) Long id){
+
+	@RequestMapping(value = "/messages/delete", method = RequestMethod.POST)
+	public String delete(
+			@RequestParam(value = "id", required = false) Long id) {
 		messagesService.deleteConversation(id);
-		
+
 		return "redirect:/messages";
 	}
 
