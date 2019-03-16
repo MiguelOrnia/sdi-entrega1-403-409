@@ -74,8 +74,12 @@ public class SaleController {
 	@GetMapping("/sales/search")
 	public String search(Model model, Pageable pageable, @RequestParam(required = false) String searchText, @RequestParam(required = false) Long error) {
 		Page<Sale> salePage = getPageSales(pageable, searchText);
-		if(error!=null)
+		if (searchText == null) {
+            searchText = "";
+		}
+		if(error!=null) {
 			model.addAttribute("error", error);
+		}
 		model.addAttribute("page", salePage);
 		model.addAttribute("sales", salePage.getContent());
 		model.addAttribute("searchText", searchText);
