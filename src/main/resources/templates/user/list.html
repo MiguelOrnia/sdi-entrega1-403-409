@@ -28,13 +28,13 @@
 						<td th:text="${user.email}">user@email.com</td>
 						<td th:text="${user.name}">Nombre del usuario</td>
 						<td th:text="${user.surname}">Apellidos del usuario</td>
-						<td><input type="checkbox" name="ck" th:value="${user.id}" /></td>
+						<td><input class="checkBox" type="checkbox" name="ck" th:value="${user.id}" /></td>
 					</tr>
 				</tbody>
 			</table>
 			<div id="deleteError" th:if="${param.error}" th:text=#{delete.error}
 					class="alert alert-danger" role="alert">Delete error</div>
-			<button type="submit" th:text=#{delete.button}></button>
+			<button id="delete" type="submit" th:text=#{delete.button}></button>
 		</div>
 	</form>
 	<footer th:replace="fragments/footer" />

@@ -12,7 +12,7 @@
 
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
-				<li><a href="/" th:text="#{nav.home}">Home</a></li>
+				<li id="home"><a href="/" th:text="#{nav.home}">Home</a></li>
 				<li id="users-menu" class="dropdown"
 					sec:authorize="hasRole('ROLE_ADMIN')"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -20,7 +20,7 @@
 					<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="/user/list" th:text="#{nav.list.users}">Ver Usuarios</a></li>
+						<li id="usuarios"><a href="/user/list" th:text="#{nav.list.users}">Ver Usuarios</a></li>
 					</ul></li>
 
 				<li id="users-menu" class="dropdown"

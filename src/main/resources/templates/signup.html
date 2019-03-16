@@ -3,7 +3,7 @@
 <head th:replace="fragments/head_bs4" />
 <body>
 	<nav th:replace="fragments/nav_bs4"/>
-	<div class="wrapper fadeInDown">
+	<div class="wrapper">
 		<div id="formContent">
 		
 			<!-- Tabs Titles -->
@@ -13,32 +13,32 @@
 			<form method="post" action="/signup" th:object="${user}">
 				
 				<label class="control-label" for="email" th:text="#{signup.email}">Email:</label>
-				<input type="text" class="fadeIn second" name="email"
+				<input type="text" name="email"
 						placeholder="user@email.com" required="true" /> 
 				<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
 				
 				<label class="control-label" for="name" th:text="#{signup.name}">Nombre:</label>
-				<input type="text" class="fadeIn second" name="name"
+				<input type="text" name="name"
 						placeholder="Ejemplo: Juan" required="true" /> 
 				<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
 				
 				<label class="control-label" for="surname" th:text="#{signup.surname}">Apellidos:</label>
-				<input type="text" class="fadeIn second" name="surname"
+				<input type="text" name="surname"
 						placeholder="Ejemplo: Peréz Almonte" required="true" />
 				<span class="text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" />
 				
 				<label class="control-label" for="password" th:text="#{signup.password}">Password:</label>
-				<input type="password" class="fadeIn third" name="password"
+				<input type="password" name="password"
 						placeholder="Entre el Password" /> <span class="text-danger"
 						th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
 				
 				<label class="control-label" for="repassword" th:text="#{signup.repassword}">Repite el password:</label>
-				<input type="password" class="fadeIn third" name="repassword"
+				<input type="password" name="repassword"
 						placeholder="Repita el Password" /> <span class="text-danger"
 						th:if="${#fields.hasErrors('repassword')}"
 						th:errors="*{repassword}" />
 						
-				<input type="submit" class="fadeIn fourth" th:value="#{signup.message}">
+				<input id="enviar" type="submit" th:value="#{signup.message}">
 			
 			</form>
 
