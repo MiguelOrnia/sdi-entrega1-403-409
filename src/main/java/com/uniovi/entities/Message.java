@@ -30,6 +30,13 @@ public class Message {
 	public Message() {
 		this.valid = true;
 	}
+	
+	public Message(User user, String body) {
+		this();
+		setSender(user);
+		setBody(body);
+		setDate(LocalDateTime.now());
+	}
 
 	public User getSender() {
 		return sender;

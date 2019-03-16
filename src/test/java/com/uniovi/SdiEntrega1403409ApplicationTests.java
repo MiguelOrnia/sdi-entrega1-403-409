@@ -24,6 +24,8 @@ import com.uniovi.entities.User;
 import com.uniovi.entities.types.Role;
 import com.uniovi.entities.types.SaleStatus;
 import com.uniovi.pageobjects.*;
+import com.uniovi.repositories.ConversationsRepository;
+import com.uniovi.repositories.MessagesRepository;
 import com.uniovi.repositories.SaleRepository;
 import com.uniovi.repositories.UsersRepository;
 import com.uniovi.services.SaleService;
@@ -46,11 +48,22 @@ public class SdiEntrega1403409ApplicationTests {
 
 	@Autowired
 	private SaleRepository saleRepository;
+	
+	@Autowired
+	private MessagesRepository messagesRepository;
+	
+	@Autowired
+	private ConversationsRepository conversationsRepository;
 
 	// Mi Path
-	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\PL-SDI-Sesion5-material\\geckodriver024win64.exe";
+//	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+//	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\PL-SDI-Sesion5-material\\geckodriver024win64.exe";
 
+	//Path Emilio
+	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
+	
+	
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URL = "http://localhost:8090";
 
@@ -69,6 +82,8 @@ public class SdiEntrega1403409ApplicationTests {
 	}
 
 	private void initDb() {
+		conversationsRepository.deleteAll();
+		messagesRepository.deleteAll();
 		saleRepository.deleteAll();
 		usersRepository.deleteAll();
 
@@ -584,4 +599,17 @@ public class SdiEntrega1403409ApplicationTests {
 //		// Comprobamos que entramos en la página de login
 //		PO_LoginView.checkKey(driver, "error.notAuthorized", PO_Properties.getSPANISH());
 //	}
+	
+		/**
+		 * Sobre una búsqueda determinada de ofertas (a elección de desarrollador), 
+		 * enviar un mensaje a una oferta concreta. Se abriría dicha conversación por primera vez.
+		 * Comprobar que el mensaje aparece en el listado de mensajes.
+		 */
+		@Test
+		public void PR31() {
+			PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+			PO_SearchView.goToPage(driver);
+		}
+	
+	
 }

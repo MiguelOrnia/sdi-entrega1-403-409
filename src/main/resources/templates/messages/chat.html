@@ -28,7 +28,7 @@
 				<div th:each="message : ${messages}" class="message" th:classappend="${message.sender.equals(activeUser)} ? sent : received ">
 					<div class="messageContent" th:text="${message.body}">Lorem, ipsum dolor sit amet
 					</div>
-					<div class="messageTime" th:text="${message.date}"></div>
+					<div class="messageTime" th:text="${message.date.toString('dd/MM/yyy HH:mm')}"></div>
 				</div>
 
 
