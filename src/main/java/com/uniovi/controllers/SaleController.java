@@ -9,8 +9,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import com.uniovi.entities.Sale;
 import com.uniovi.entities.User;
 import com.uniovi.services.SaleService;
 import com.uniovi.services.UsersService;
+import com.uniovi.validators.AddSaleValidator;
 
 @Controller
 public class SaleController {
@@ -30,13 +32,22 @@ public class SaleController {
 	@Autowired
 	private UsersService usersService;
 
+	@Autowired
+	private AddSaleValidator addSaleValidator;
+
 	@RequestMapping("/sales/add")
-	public String addSale() {
+	public String addSale(Model model) {
+		model.addAttribute("sale", new Sale());
 		return "sales/add";
 	}
 
 	@RequestMapping(value = "/sales/add", method = RequestMethod.POST)
-	public String addSale(Model model, @ModelAttribute Sale sale) {
+	public String addSale(Model model, @Validated Sale sale,
+			BindingResult result) {
+		addSaleValidator.validate(sale, result);
+		if (result.hasErrors()) {
+			return "sales/add";
+		}
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String email = auth.getName();
@@ -46,6 +57,7 @@ public class SaleController {
 		model.addAttribute("addedSaleTitle", sale.getTitle());
 		return "sales/add";
 	}
+
 
 	@RequestMapping("/sales/list")
 	public String listSales(Model model) {

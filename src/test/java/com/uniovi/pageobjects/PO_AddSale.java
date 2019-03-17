@@ -20,7 +20,7 @@ public class PO_AddSale extends PO_View {
 	}
 
 	public static void addSale(WebDriver driver, String title, String text,
-			Double price, String date) {
+			Double price) {
 		WebElement titleForm = driver.findElement(By.name("title"));
 		titleForm.click();
 		titleForm.clear();
@@ -32,13 +32,7 @@ public class PO_AddSale extends PO_View {
 		WebElement priceForm = driver.findElement(By.name("price"));
 		priceForm.click();
 		priceForm.clear();
-		priceForm.sendKeys(String.format("%f.2", price));
-		if (!date.isEmpty()) {
-			WebElement dateForm = driver.findElement(By.name("date"));
-			dateForm.click();
-			dateForm.clear();
-			dateForm.sendKeys(date);
-		}
+		priceForm.sendKeys(String.format("%.2f", price));
 		// Pulsar el boton de crear.
 		By boton = By.className("btn");
 		driver.findElement(boton).click();

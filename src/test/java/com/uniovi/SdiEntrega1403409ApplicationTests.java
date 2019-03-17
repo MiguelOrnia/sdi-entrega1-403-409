@@ -48,22 +48,23 @@ public class SdiEntrega1403409ApplicationTests {
 
 	@Autowired
 	private SaleRepository saleRepository;
-	
+
 	@Autowired
 	private MessagesRepository messagesRepository;
-	
+
 	@Autowired
 	private ConversationsRepository conversationsRepository;
 
-	// Mi Path
-//	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-//	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\PL-SDI-Sesion5-material\\geckodriver024win64.exe";
+	// Path Miguel
+	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\"
+			+ "PL-SDI-Sesion5-material\\geckodriver024win64.exe";
 
-	//Path Emilio
-	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
-	
-	
+//	// Path Emilio
+//	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+//	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\"
+//			+ "PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
+
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URL = "http://localhost:8090";
 
@@ -403,29 +404,32 @@ public class SdiEntrega1403409ApplicationTests {
 		// Vamos a la pagina
 		PO_AddSale.goToPage(driver);
 		// Rellenar
-		PO_AddSale.addSale(driver, "Test", "Oferta para testear", 100.0, "");
+		PO_AddSale.addSale(driver, "Test", "Oferta para testear", 100.0);
 		// Comprobar que ha sido añadida
+		PO_MySales.goToPage(driver);
+		PO_MySales.checkElement(driver, "text", "Test");
+		PO_MySales.checkElement(driver, "text", "Oferta para testear");
 	}
 
-//	// PR17.Ir al formulario de alta de oferta, rellenarla con datos inválidos
-//	// (campo título vacío) y pulsar
-//	// el botón Submit. Comprobar que se muestra el mensaje de campo obligatorio.
-//	@Test
-//	public void PR17() {
-//		// Rellenamos el formulario
-//		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
-//		// Vamos a la pagina
-//		PO_AddSale.goToPage(driver);
-//		// Rellenar
-//		PO_AddSale.addSale(driver, " ", "Oferta para testear", 100.0, "");
-//		PO_AddSale.checkKey(driver, "Error.empty", PO_Properties.getSPANISH());
-//		PO_AddSale.addSale(driver, "Test", " ", 100.0, "");
-//		PO_AddSale.checkKey(driver, "Error.empty", PO_Properties.getSPANISH());
-//		PO_AddSale.addSale(driver, "Test", "Oferta para testear", -100.0, "");
-//		PO_AddSale.checkKey(driver, "Error.addOffer.price.value", PO_Properties.getSPANISH());
-//		PO_AddSale.addSale(driver, "Test", "Oferta para testear", 100.0, "01/01/2000");
-//		PO_AddSale.checkKey(driver, "Error.addOffer.date.value", PO_Properties.getSPANISH());
-//	}
+	// PR17.Ir al formulario de alta de oferta, rellenarla con datos inválidos
+	// (campo título vacío) y pulsar
+	// el botón Submit. Comprobar que se muestra el mensaje de campo
+	// obligatorio.
+	@Test
+	public void PR17() {
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		// Vamos a la pagina
+		PO_AddSale.goToPage(driver);
+		// Rellenar
+		PO_AddSale.addSale(driver, " ", "Oferta", 80.0);
+		PO_AddSale.checkKey(driver, "Error.empty", PO_Properties.getSPANISH());
+		PO_AddSale.addSale(driver, "Test", " ", 80.0);
+		PO_AddSale.checkKey(driver, "Error.empty", PO_Properties.getSPANISH());
+		PO_AddSale.addSale(driver, "Test", "Oferta", -200.0);
+		PO_AddSale.checkKey(driver, "Error.addSale.price.value",
+				PO_Properties.getSPANISH());
+	}
 
 	// PR18. Mostrar el listado de ofertas para dicho usuario y comprobar que se
 	// muestran todas los que existen para este usuario.
@@ -637,17 +641,17 @@ public class SdiEntrega1403409ApplicationTests {
 //		PO_LoginView.checkKey(driver, "error.notAuthorized",
 //				PO_Properties.getSPANISH());
 //	}
-	
-		/**
-		 * Sobre una búsqueda determinada de ofertas (a elección de desarrollador), 
-		 * enviar un mensaje a una oferta concreta. Se abriría dicha conversación por primera vez.
-		 * Comprobar que el mensaje aparece en el listado de mensajes.
-		 */
-		@Test
-		public void PR31() {
-			PO_LoginView.fillForm(driver, "miguel@email.com", "password");
-			PO_SearchView.goToPage(driver);
-		}
-	
-	
+
+	/**
+	 * Sobre una búsqueda determinada de ofertas (a elección de desarrollador),
+	 * enviar un mensaje a una oferta concreta. Se abriría dicha conversación
+	 * por primera vez. Comprobar que el mensaje aparece en el listado de
+	 * mensajes.
+	 */
+	@Test
+	public void PR31() {
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		PO_SearchView.goToPage(driver);
+	}
+
 }
