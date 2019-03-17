@@ -6,7 +6,8 @@ import org.openqa.selenium.WebElement;
 
 public class PO_LoginView extends PO_NavView {
 
-	public static void fillForm(WebDriver driver, String usernamep, String passwordp) {
+	public static void fillForm(WebDriver driver, String usernamep,
+			String passwordp) {
 		WebElement username = driver.findElement(By.name("username"));
 		username.click();
 		username.clear();

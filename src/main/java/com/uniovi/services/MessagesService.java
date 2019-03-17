@@ -14,14 +14,13 @@ import com.uniovi.repositories.ConversationsRepository;
 import com.uniovi.repositories.MessagesRepository;
 
 @Service
-public class MessagesService  {
+public class MessagesService {
 
 	@Autowired
 	private MessagesRepository messagesRepository;
-	
+
 	@Autowired
 	private ConversationsRepository conversationsRepository;
-
 
 	public void addMessage(Message message) {
 		messagesRepository.save(message);
@@ -31,10 +30,11 @@ public class MessagesService  {
 		Conversation chat = conversationsRepository.findById(id).orElse(null);
 		return chat;
 	}
-	
+
 	public Conversation getConversation(User customer, Sale sale) {
-		Conversation chat = conversationsRepository.getConversation(customer, sale);
-		if(chat==null) {
+		Conversation chat = conversationsRepository.getConversation(customer,
+				sale);
+		if (chat == null) {
 			chat = new Conversation(customer, sale);
 			conversationsRepository.save(chat);
 		}
@@ -51,7 +51,8 @@ public class MessagesService  {
 	public List<Conversation> getConversations(User activeUser) {
 		List<Conversation> conversations = new ArrayList<Conversation>();
 		conversations.addAll(activeUser.getParticipates());
-		activeUser.getPublishedSales().forEach(s -> conversations.addAll(s.getConversations()));
+		activeUser.getPublishedSales()
+				.forEach(s -> conversations.addAll(s.getConversations()));
 		return conversations;
 	}
 
@@ -59,5 +60,4 @@ public class MessagesService  {
 		conversationsRepository.deleteById(id);
 	}
 
-	
 }

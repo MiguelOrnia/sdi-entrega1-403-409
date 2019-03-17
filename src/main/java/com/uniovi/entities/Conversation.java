@@ -20,32 +20,33 @@ public class Conversation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
+
 	@ManyToOne
 	private User customer;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="belongs",cascade=CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "belongs", 
+			cascade = CascadeType.ALL)
 	private Set<Message> messages = new HashSet<>();
-	
+
 	@ManyToOne
 	private Sale sale;
-	
-	public Conversation() {}
-	
+
+	public Conversation() {
+	}
+
 	public Conversation(User customer, Sale sale) {
 		this.customer = customer;
 		this.sale = sale;
 	}
 
 	public List<Message> getMessages() {
-		return messages.stream().sorted(Comparator.comparing(Message::getDate)).collect(Collectors.toList());
+		return messages.stream().sorted(Comparator.comparing(Message::getDate))
+				.collect(Collectors.toList());
 	}
 
 	public void addMessage(Message message) {
 		this.messages.add(message);
 	}
-
 
 	public Long getId() {
 		return id;

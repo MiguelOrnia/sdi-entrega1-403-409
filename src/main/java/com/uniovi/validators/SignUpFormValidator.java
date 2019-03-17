@@ -8,7 +8,7 @@ import org.springframework.validation.*;
 
 @Component
 public class SignUpFormValidator implements Validator {
-	
+
 	@Autowired
 	private UsersService userService;
 
@@ -20,7 +20,6 @@ public class SignUpFormValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Error.empty");
 		if (user.getEmail().length() < 5 || user.getEmail().length() > 24) {
 			errors.rejectValue("email", "Error.signup.email.length");
 		}
@@ -33,11 +32,13 @@ public class SignUpFormValidator implements Validator {
 		if (user.getSurname().length() < 5 || user.getName().length() > 24) {
 			errors.rejectValue("surname", "Error.signup.surname.length");
 		}
-		if (user.getPassword().length() < 5 || user.getPassword().length() > 24) {
+		if (user.getPassword().length() < 5
+				|| user.getPassword().length() > 24) {
 			errors.rejectValue("password", "Error.signup.password.length");
 		}
 		if (!user.getRepassword().equals(user.getPassword())) {
-			errors.rejectValue("repassword", "Error.signup.repassword.coincidence");
+			errors.rejectValue("repassword",
+					"Error.signup.repassword.coincidence");
 		}
 	}
 }

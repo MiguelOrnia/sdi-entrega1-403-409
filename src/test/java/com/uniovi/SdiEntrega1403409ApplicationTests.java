@@ -276,8 +276,7 @@ public class SdiEntrega1403409ApplicationTests {
 	@Test
 	public void PR08() {
 		// Rellenamos el formulario
-		PO_LoginView.fillForm(driver, "miguel@email.com",
-				"contrasenaincorrecta");
+		PO_LoginView.fillForm(driver, "miguel@email.com", "123456789");
 		// Comprobamos que el error existe
 		PO_LoginView.checkKey(driver, "login.error",
 				PO_Properties.getSPANISH());
@@ -294,12 +293,29 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-//	// PR11. Comprobar que el botón cerrar sesión no está visible si el usuario no
-//	// está autenticado.
-//	@Test
-//	public void PR11() {
-//		PO_View.checkNoKey(driver, "logout.message", PO_Properties.getSPANISH());
-//	}
+	// PR10. Hacer click en la opción de salir de sesión y comprobar que se
+	// redirige
+	// a la página de inicio de sesión (Login).
+	@Test
+	public void PR10() {
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		// Salimos de sesión
+		List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'desconexion')]/a");
+		elementos.get(0).click();
+		// Comprobamos que entramos en la página de login
+		PO_LoginView.checkElement(driver, "id", "login");
+	}
+
+	// PR11. Comprobar que el botón cerrar sesión no está visible si el usuario
+	// no
+	// está autenticado.
+	@Test
+	public void PR11() {
+		PO_View.checkNoKey(driver, "logout.message",
+				PO_Properties.getSPANISH());
+	}
 
 	// PR12. Mostrar el listado de usuarios y comprobar que se muestran todos
 	// los
@@ -532,21 +548,25 @@ public class SdiEntrega1403409ApplicationTests {
 		assertEquals(0.0, balance, 0.1);
 	}
 
-//	// PR25. Sobre una búsqueda determinada (a elección de desarrollador), intentar
-//	// comprar una oferta
-//	// que esté por encima de saldo disponible del comprador. Y comprobar que se
-//	// muestra el mensaje de
-//	// saldo no suficiente.
-//	@Test
-//	public void PR25() {
-//		driver.navigate().to(URL);
-//		// Buscar
-//		PO_HomeView.searchForSale(driver, "Joya");
-//		// Comprar la oferta
-//		PO_HomeView.buyOffer(driver, "Joya");
-//		// Comprobar balance
-//		PO_HomeView.checkKey(driver, "error.offer.notEnoughbalance", PO_Properties.getSPANISH());
-//	}
+	// PR25. Sobre una búsqueda determinada (a elección de desarrollador),
+	// intentar
+	// comprar una oferta
+	// que esté por encima de saldo disponible del comprador. Y comprobar que se
+	// muestra el mensaje de
+	// saldo no suficiente.
+	@Test
+	public void PR25() {
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		PO_SearchView.goToPage(driver);
+		// Buscar
+		PO_SearchView.searchForSale(driver, "Consola");
+		// Comprar la oferta
+		PO_SearchView.buyOffer(driver, "Consola");
+		// Comprobar balance
+		PO_HomeView.checkKey(driver, "sale.buy.error",
+				PO_Properties.getSPANISH());
+	}
 
 	// PR26. Ir a la opción de ofertas compradas del usuario y mostrar la lista.
 	// Comprobar que aparecen las ofertas que deben aparecer.
@@ -561,7 +581,25 @@ public class SdiEntrega1403409ApplicationTests {
 	// PR27. Internalización
 	@Test
 	public void PR27() {
-
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		// Comprobamos las vistas de las paginas
+		PO_HomeView.goToPage(driver);
+		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+		PO_NavView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+		PO_AddSale.goToPage(driver);
+		PO_AddSale.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+		// Como admin
+		List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'desconexion')]/a");
+		elementos.get(0).click();
+		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_UserList.goToPage(driver);
+		PO_UserList.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
 	}
 
 	// PR28. Intentar acceder sin estar autenticado a la opción de listado de
@@ -587,17 +625,17 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_LoginView.checkElement(driver, "id", "login");
 	}
 
-//	// PR30. Estando autenticado como usuario estándar intentar acceder a la opción
+//	// PR30. Estando autenticado como usuario estándar intentar acceder a la
+//	// opción
 //	// de listado de usuarios del administrador. Se deberá indicar un mensaje de
 //	// acción prohibida.
 //	@Test
 //	public void PR30() {
 //		// Rellenamos el formulario
 //		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
-//		// Salimos de sesión
 //		driver.navigate().to(URL + "/user/list/");
-//		// Comprobamos que entramos en la página de login
-//		PO_LoginView.checkKey(driver, "error.notAuthorized", PO_Properties.getSPANISH());
+//		PO_LoginView.checkKey(driver, "error.notAuthorized",
+//				PO_Properties.getSPANISH());
 //	}
 	
 		/**
