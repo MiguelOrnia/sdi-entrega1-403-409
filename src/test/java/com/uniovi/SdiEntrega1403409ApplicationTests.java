@@ -74,14 +74,14 @@ public class SdiEntrega1403409ApplicationTests {
 	private ConversationsRepository conversationsRepository;
 
 	// Path Miguel
-//	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-//	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\"
-//			+ "PL-SDI-Sesion5-material\\geckodriver024win64.exe";
+	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\"
+			+ "PL-SDI-Sesion5-material\\geckodriver024win64.exe";
 
 //	// Path Emilio
-	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\"
-			+ "PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
+//	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+//	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\"
+//			+ "PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
 
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URL = "http://localhost:8090";
@@ -149,9 +149,7 @@ public class SdiEntrega1403409ApplicationTests {
 		sale6.setStatus(SaleStatus.SOLD);
 		Sale sale7 = new Sale("Boligrafo", "Vendo boligrafo azul", 25000);
 		Sale sale8 = new Sale("Ordenador", "Vendo ordenador", 25000);
-		Sale sale9 = new Sale("Calculadora", "Vendo calculadora", 25000);
-		sale9.setBuyer(user4);
-		sale9.setStatus(SaleStatus.SOLD);
+		Sale s3 = new Sale("Vendo Play 3", "En perfecto estado", 80);
 		Sale sale10 = new Sale("Gafas", "Vendo gafas", 2500);
 		sale10.setBuyer(user1);
 		sale10.setStatus(SaleStatus.SOLD);
@@ -164,17 +162,19 @@ public class SdiEntrega1403409ApplicationTests {
 		saleService.addSale(sale6, user1);
 		saleService.addSale(sale7, user1);
 		saleService.addSale(sale8, user1);
-		saleService.addSale(sale9, user1);
 		saleService.addSale(sale10, user4);
 		saleService.addSale(sale11, user4);
 
 		// Adding Sales
 		Sale s1 = new Sale("Vendo Ford Fiesta", "En perfecto estado", 4560.2);
 		Sale s2 = new Sale("Vendo iPhone 4", "Con arañazos", 120);
-		Sale s3 = new Sale("Vendo Play 3", "En perfecto estado", 80);
+		Sale sale9 = new Sale("Calculadora", "Vendo calculadora", 25000);
+		sale9.setBuyer(user4);
+		sale9.setStatus(SaleStatus.SOLD);
 		saleService.addSale(s1, user1);
 		saleService.addSale(s2, user1);
 		saleService.addSale(s3, user1);
+		saleService.addSale(sale9, user1);
 
 		Sale s12 = new Sale("Vendo Cosa Random 1", "En perfecto estado",
 				4560.2);
@@ -375,7 +375,10 @@ public class SdiEntrega1403409ApplicationTests {
 		driver.quit();
 	}
 
-	// PR01. Registro de Usuario con datos válidos
+	/**
+	 * PR01. Registro de Usuario con datos válidos
+	 */
+
 	@Test
 	public void PR01() {
 		// Vamos al formulario de registro
@@ -388,8 +391,11 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR02. Registro de Usuario con datos inválidos (email vacío, nombre vacío,
-	// apellidos vacíos)
+	/**
+	 * PR02. Registro de Usuario con datos inválidos (email vacío, nombre vacío,
+	 * apellidos vacíos)
+	 */
+
 	@Test
 	public void PR02() {
 		// Vamos al formulario de registro
@@ -420,8 +426,11 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR03. Registro de Usuario con datos inválidos (repetición de contraseña
-	// inválida).
+	/**
+	 * PR03. Registro de Usuario con datos inválidos (repetición de contraseña
+	 * inválida).
+	 */
+
 	@Test
 	public void PR03() {
 		// Vamos al formulario de registro
@@ -434,7 +443,10 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR04. Registro de Usuario con datos inválidos (email existente).
+	/**
+	 * PR04. Registro de Usuario con datos inválidos (email existente).
+	 */
+
 	@Test
 	public void PR04() {
 		// Vamos al formulario de registro
@@ -447,7 +459,10 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR05. Inicio de sesión con datos válidos (administrador).
+	/**
+	 * PR05. Inicio de sesión con datos válidos (administrador).
+	 */
+
 	@Test
 	public void PR05() {
 		// Rellenamos el formulario
@@ -456,7 +471,10 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_NavView.checkIsAdmin(driver);
 	}
 
-	// PR06. Inicio de sesión con datos válidos (usuario estándar).
+	/**
+	 * PR06. Inicio de sesión con datos válidos (usuario estándar).
+	 */
+
 	@Test
 	public void PR06() {
 		// Rellenamos el formulario
@@ -465,9 +483,11 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_NavView.checkIsUser(driver);
 	}
 
-	// PR07. Inicio de sesión con datos inválidos (usuario estándar, campo email
-	// y
-	// contraseña vacíos).
+	/**
+	 * PR07. Inicio de sesión con datos inválidos (usuario estándar, campo email
+	 * y contraseña vacíos).
+	 */
+
 	@Test
 	public void PR07() {
 		// Rellenamos el formulario
@@ -477,9 +497,11 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR08. Inicio de sesión con datos válidos (usuario estándar, email
-	// existente,
-	// pero contraseña incorrecta).
+	/**
+	 * PR08. Inicio de sesión con datos válidos (usuario estándar, email
+	 * existente, pero contraseña incorrecta).
+	 */
+
 	@Test
 	public void PR08() {
 		// Rellenamos el formulario
@@ -489,8 +511,11 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR09. Inicio de sesión con datos inválidos (usuario estándar, email no
-	// existente en la aplicación).
+	/**
+	 * PR09. Inicio de sesión con datos inválidos (usuario estándar, email no
+	 * existente en la aplicación).
+	 */
+
 	@Test
 	public void PR09() {
 		// Rellenamos el formulario
@@ -500,9 +525,11 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR10. Hacer click en la opción de salir de sesión y comprobar que se
-	// redirige
-	// a la página de inicio de sesión (Login).
+	/**
+	 * PR10. Hacer click en la opción de salir de sesión y comprobar que se
+	 * redirige a la página de inicio de sesión (Login).
+	 */
+
 	@Test
 	public void PR10() {
 		// Rellenamos el formulario
@@ -515,18 +542,22 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_LoginView.checkElement(driver, "id", "login");
 	}
 
-	// PR11. Comprobar que el botón cerrar sesión no está visible si el usuario
-	// no
-	// está autenticado.
+	/**
+	 * PR11. Comprobar que el botón cerrar sesión no está visible si el usuario
+	 * no está autenticado.
+	 */
+
 	@Test
 	public void PR11() {
 		PO_View.checkNoKey(driver, "logout.message",
 				PO_Properties.getSPANISH());
 	}
 
-	// PR12. Mostrar el listado de usuarios y comprobar que se muestran todos
-	// los
-	// que existen en el sistema.
+	/**
+	 * PR12. Mostrar el listado de usuarios y comprobar que se muestran todos
+	 * los que existen en el sistema.
+	 */
+
 	@Test
 	public void PR12() {
 		// Rellenamos el formulario
@@ -544,8 +575,11 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_UserList.checkElement(driver, "text", "alvaro@email.com");
 	}
 
-	// PR13. Ir a la lista de usuarios, borrar el primer usuario de la lista,
-	// comprobar que la lista se actualiza y dicho usuario desaparece.
+	/**
+	 * PR13. Ir a la lista de usuarios, borrar el primer usuario de la lista,
+	 * comprobar que la lista se actualiza y dicho usuario desaparece.
+	 */
+
 	@Test
 	public void PR13() {
 		// Rellenamos el formulario
@@ -563,8 +597,11 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_UserList.checkElement(driver, "text", "alvaro@email.com");
 	}
 
-	// PR14. Ir a la lista de usuarios, borrar el último usuario de la lista,
-	// comprobar que la lista se actualiza y dicho usuario desaparece.
+	/**
+	 * PR14. Ir a la lista de usuarios, borrar el último usuario de la lista,
+	 * comprobar que la lista se actualiza y dicho usuario desaparece.
+	 */
+
 	@Test
 	public void PR14() {
 		// Rellenamos el formulario
@@ -582,9 +619,11 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_UserList.checkElement(driver, "text", "maria@hotmail.es");
 	}
 
-	// PR15. Ir a la lista de usuarios, borrar 3 usuarios, comprobar que la
-	// lista se
-	// actualiza y dichos usuarios desaparecen.
+	/**
+	 * PR15. Ir a la lista de usuarios, borrar 3 usuarios, comprobar que la
+	 * lista se actualiza y dichos usuarios desaparecen.
+	 */
+
 	@Test
 	public void PR15() {
 		// Rellenamos el formulario
@@ -600,9 +639,12 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_UserList.checkElement(driver, "text", "alvaro@email.com");
 	}
 
-	// PR16.Ir al formulario de alta de oferta, rellenarla con datos válidos y
-	// pulsar el botón Submit.
-	// Comprobar que la oferta sale en el listado de ofertas de dicho usuario.
+	/**
+	 * PR16.Ir al formulario de alta de oferta, rellenarla con datos válidos y
+	 * pulsar el botón Submit. Comprobar que la oferta sale en el listado de
+	 * ofertas de dicho usuario.
+	 */
+
 	@Test
 	public void PR16() {
 		// Rellenamos el formulario
@@ -617,10 +659,12 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_MySales.checkElement(driver, "text", "Oferta para testear");
 	}
 
-	// PR17.Ir al formulario de alta de oferta, rellenarla con datos inválidos
-	// (campo título vacío) y pulsar
-	// el botón Submit. Comprobar que se muestra el mensaje de campo
-	// obligatorio.
+	/**
+	 * PR17.Ir al formulario de alta de oferta, rellenarla con datos inválidos
+	 * (campo título vacío) y pulsar el botón Submit. Comprobar que se muestra
+	 * el mensaje de campo obligatorio.
+	 */
+
 	@Test
 	public void PR17() {
 		// Rellenamos el formulario
@@ -637,8 +681,11 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR18. Mostrar el listado de ofertas para dicho usuario y comprobar que se
-	// muestran todas los que existen para este usuario.
+	/**
+	 * PR18. Mostrar el listado de ofertas para dicho usuario y comprobar que se
+	 * muestran todas los que existen para este usuario.
+	 */
+
 	@Test
 	public void PR18() {
 		// Rellenamos el formulario
@@ -649,8 +696,11 @@ public class SdiEntrega1403409ApplicationTests {
 
 	}
 
-	// PR19. Ir a la lista de ofertas, borrar la primera oferta de la lista,
-	// comprobar que la lista se actualiza y que la oferta desaparece.
+	/**
+	 * PR19. Ir a la lista de ofertas, borrar la primera oferta de la lista,
+	 * comprobar que la lista se actualiza y que la oferta desaparece.
+	 */
+
 	@Test
 	public void PR19() {
 		// Rellenamos el formulario
@@ -665,8 +715,11 @@ public class SdiEntrega1403409ApplicationTests {
 
 	}
 
-	// PR20. Ir a la lista de ofertas, borrar la última oferta de la lista,
-	// comprobar que la lista se actualiza y que la oferta desaparece.
+	/**
+	 * PR20. Ir a la lista de ofertas, borrar la última oferta de la lista,
+	 * comprobar que la lista se actualiza y que la oferta desaparece.
+	 */
+
 	@Test
 	public void PR20() {
 		// Rellenamos el formulario
@@ -678,15 +731,19 @@ public class SdiEntrega1403409ApplicationTests {
 		// Cogemos el indice del ultimo objeto eliminable
 		int lastIndex = PO_MySales.checkNumberOfDeleteableItems(driver) - 1;
 
+		SeleniumUtils.esperarSegundos(driver, 2);
 		// Eliminamos Ultima oferta y comprobamos que los elementos se
 		// redujeron.
 		assertTrue(PO_MySales.deleteItem(driver, lastIndex));
 
 	}
 
-	// PR21. Hacer una búsqueda con el campo vacío y comprobar que se muestra la
-	// página que
-	// corresponde con el listado de las ofertas existentes en el sistema
+	/**
+	 * PR21. Hacer una búsqueda con el campo vacío y comprobar que se muestra la
+	 * página que corresponde con el listado de las ofertas existentes en el
+	 * sistema
+	 */
+
 	@Test
 	public void PR21() {
 		// Rellenamos el formulario
@@ -697,14 +754,20 @@ public class SdiEntrega1403409ApplicationTests {
 		// Comprobar las ofertas
 		List<WebElement> sale = PO_SearchView.checkElement(driver, "class",
 				"table-light");
-		assertTrue(sale.size() == 2);
+		assertTrue(sale.size() == 5);
 		SeleniumUtils.textoPresentePagina(driver, "Consola");
 		SeleniumUtils.textoPresentePagina(driver, "Raton");
+		SeleniumUtils.textoPresentePagina(driver, "Vendo Cosa Random 1");
+		SeleniumUtils.textoPresentePagina(driver, "Vendo Cosa Random 2");
+		SeleniumUtils.textoPresentePagina(driver, "Vendo Cosa Random 3");
 	}
 
-	// PR22. Hacer una búsqueda escribiendo en el campo un texto que no exista y
-	// comprobar que se
-	// muestra la página que corresponde, con la lista de ofertas vacía.
+	/**
+	 * PR22. Hacer una búsqueda escribiendo en el campo un texto que no exista y
+	 * comprobar que se muestra la página que corresponde, con la lista de
+	 * ofertas vacía.
+	 */
+
 	@Test
 	public void PR22() {
 		// Rellenamos el formulario
@@ -717,11 +780,12 @@ public class SdiEntrega1403409ApplicationTests {
 		SeleniumUtils.textoNoPresentePagina(driver, "Raton");
 	}
 
-	// PR23. Sobre una búsqueda determinada, comprar una oferta que deja
-	// un saldo positivo en el contador del comprobador. Y comprobar que el
-	// contador
-	// se actualiza
-	// correctamente en la vista del comprador.
+	/**
+	 * PR23. Sobre una búsqueda determinada, comprar una oferta que deja un
+	 * saldo positivo en el contador del comprobador. Y comprobar que el
+	 * contador se actualiza correctamente en la vista del comprador.
+	 */
+
 	@Test
 	public void PR23() {
 		// Rellenamos el formulario
@@ -737,12 +801,13 @@ public class SdiEntrega1403409ApplicationTests {
 		assertEquals(50.0, balance, 0.1);
 	}
 
-	// PR24. Sobre una búsqueda determinada (a elección de desarrollador),
-	// comprar
-	// una oferta que deja
-	// un saldo 0 en el contador del comprobador. Y comprobar que el contador se
-	// actualiza correctamente en
-	// la vista del comprador.
+	/**
+	 * PR24. Sobre una búsqueda determinada (a elección de desarrollador),
+	 * comprar una oferta que deja un saldo 0 en el contador del comprobador. Y
+	 * comprobar que el contador se actualiza correctamente en la vista del
+	 * comprador.
+	 */
+
 	@Test
 	public void PR24() {
 		// Rellenamos el formulario
@@ -758,12 +823,12 @@ public class SdiEntrega1403409ApplicationTests {
 		assertEquals(0.0, balance, 0.1);
 	}
 
-	// PR25. Sobre una búsqueda determinada (a elección de desarrollador),
-	// intentar
-	// comprar una oferta
-	// que esté por encima de saldo disponible del comprador. Y comprobar que se
-	// muestra el mensaje de
-	// saldo no suficiente.
+	/**
+	 * PR25. Sobre una búsqueda determinada (a elección de desarrollador),
+	 * intentar comprar una oferta que esté por encima de saldo disponible del
+	 * comprador. Y comprobar que se muestra el mensaje de saldo no suficiente.
+	 */
+
 	@Test
 	public void PR25() {
 		// Rellenamos el formulario
@@ -778,8 +843,10 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH());
 	}
 
-	// PR26. Ir a la opción de ofertas compradas del usuario y mostrar la lista.
-	// Comprobar que aparecen las ofertas que deben aparecer.
+	/**
+	 * PR26. Ir a la opción de ofertas compradas del usuario y mostrar la lista.
+	 * Comprobar que aparecen las ofertas que deben aparecer.
+	 */
 	@Test
 	public void PR26() {
 		// Rellenamos el formulario
@@ -788,7 +855,10 @@ public class SdiEntrega1403409ApplicationTests {
 		assertEquals(2, PO_BoughtView.checkNumberOfItems(driver));
 	}
 
-	// PR27. Internalización
+	/**
+	 * PR27. Internalización
+	 */
+
 	@Test
 	public void PR27() {
 		// Rellenamos el formulario
@@ -812,8 +882,11 @@ public class SdiEntrega1403409ApplicationTests {
 				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
 	}
 
-	// PR28. Intentar acceder sin estar autenticado a la opción de listado de
-	// usuarios del administrador. Se deberá volver al formulario de login.
+	/**
+	 * PR28. Intentar acceder sin estar autenticado a la opción de listado de
+	 * usuarios del administrador. Se deberá volver al formulario de login.
+	 */
+
 	@Test
 	public void PR28() {
 		// Vamos a la pagina
@@ -823,9 +896,12 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_LoginView.checkElement(driver, "id", "login");
 	}
 
-	// PR29. Intentar acceder sin estar autenticado a la opción de listado de
-	// ofertas propias de un usuario estándar. Se deberá volver al formulario de
-	// login.
+	/**
+	 * PR29. Intentar acceder sin estar autenticado a la opción de listado de
+	 * ofertas propias de un usuario estándar. Se deberá volver al formulario de
+	 * login.
+	 */
+
 	@Test
 	public void PR29() {
 		// Vamos a la pagina
@@ -835,19 +911,24 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_LoginView.checkElement(driver, "id", "login");
 	}
 
-//	// PR30. Estando autenticado como usuario estándar intentar acceder a la
-//	// opción
-//	// de listado de usuarios del administrador. Se deberá indicar un mensaje de
-//	// acción prohibida.
-//	@Test
-//	public void PR30() {
-//		// Rellenamos el formulario
-//		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
-//		driver.navigate().to(URL + "/user/list/");
-//		PO_LoginView.checkKey(driver, "error.notAuthorized",
-//				PO_Properties.getSPANISH());
-//	}
+	/**
+	 * PR30. Estando autenticado como usuario estándar intentar acceder a la
+	 * opción
+	 * de listado de usuarios del administrador. Se deberá indicar un mensaje de
+	 * acción prohibida.
+	 */
 	
+	@Test
+	public void PR30() {
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		// Al ser un usuario estándar, no tiene acceso a gestión de usuarios
+		SeleniumUtils.textoNoPresentePagina(driver, "Gestión de usuarios");
+		driver.navigate().to(URL + "/user/list/");
+		// No podemos acceder con este ROLE, por tanto Forbidden
+		SeleniumUtils.textoPresentePagina(driver, "Forbidden");
+	}
+
 	/**
 	 * Sobre una búsqueda determinada de ofertas (a elección de desarrollador),
 	 * enviar un mensaje a una oferta concreta. Se abriría dicha conversación
@@ -923,8 +1004,7 @@ public class SdiEntrega1403409ApplicationTests {
 		// Elimino el primer mensaje
 		PO_Messages.deleteFirstMessage(driver);
 		// Compruebo que hay una conversación menos
-		elementos = PO_Messages.checkElement(driver, "class",
-				"chatCard");
+		elementos = PO_Messages.checkElement(driver, "class", "chatCard");
 		assertTrue(elementos.size() == 5);
 	}
 
@@ -945,10 +1025,8 @@ public class SdiEntrega1403409ApplicationTests {
 		// Elimino el primer mensaje
 		PO_Messages.deleteLastMessage(driver);
 		// Compruebo que hay una conversación menos
-		elementos = PO_Messages.checkElement(driver, "class",
-				"chatCard");
+		elementos = PO_Messages.checkElement(driver, "class", "chatCard");
 		assertTrue(elementos.size() == 5);
 	}
-	
-	
+
 }

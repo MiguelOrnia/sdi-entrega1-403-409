@@ -30,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/css/**", "/img/**", "/script/**", "/", "/signup",
 						"/login", "/admin/login")
 				.permitAll().antMatchers("/user/**").hasAuthority("ROLE_ADMIN")
+				.antMatchers("/sales/**").hasAuthority("ROLE_STAND")
 				.anyRequest().authenticated().and().formLogin()
 				.loginPage("/login").permitAll().defaultSuccessUrl("/home")
 				.and().logout().permitAll();
