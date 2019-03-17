@@ -8,29 +8,31 @@
 
 	<div class="container">
 		<h2 th:text="#{sales.add.add}">Añadir oferta</h2>
-		<form class="form-horizontal" method="post" action="/sales/add">
+		<form class="form-horizontal" method="post" action="/sales/add" th:object="${sale}">
 			
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="description" th:text="#{sales.title}">Titulo:</label>
+				<label class="control-label col-sm-2" for="title" th:text="#{sales.title}">Titulo:</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="title"
 						placeholder="Ejemplo Ejercicio 1" required="true" />
+					<span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"/>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="description" th:text="#{sales.details}">Detalles:</label>
+				<label class="control-label col-sm-2" for="details" th:text="#{sales.details}">Detalles:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="details"
+					<input type="text" name="details" class="form-control"
 						placeholder="Ejemplo Ejercicio 1" required="true" />
+					<span class="text-danger" th:if="${#fields.hasErrors('details')}" th:errors="*{details}"/>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="pwd" th:text="#{sales.price}">Precio:</label>
+				<label class="control-label col-sm-2" for="price" th:text="#{sales.price}">Precio:</label>
 				<div class="col-sm-10">
-				<input type="number" name="price" min="0.00" max="10000.00" step="0.01" placeholder="Entre 0 y 10" required="true"/>
-					
+				<input type="number" name="price" max="10000.00" step="0.01" placeholder="Entre 0 y 10" required="true"/>
+				<span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>
 				</div>
 			</div>
 			
