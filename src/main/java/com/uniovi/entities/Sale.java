@@ -37,7 +37,7 @@ public class Sale {
 	@ManyToOne
 	private User buyer;
 
-	@OneToMany(mappedBy = "sale")
+	@OneToMany(mappedBy = "sale", orphanRemoval=true)
 	private Set<Conversation> conversations;
 
 	public Sale() {

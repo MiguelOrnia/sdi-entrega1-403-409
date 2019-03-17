@@ -74,14 +74,14 @@ public class SdiEntrega1403409ApplicationTests {
 	private ConversationsRepository conversationsRepository;
 
 	// Path Miguel
-	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\"
-			+ "PL-SDI-Sesion5-material\\geckodriver024win64.exe";
+//	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+//	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\"
+//			+ "PL-SDI-Sesion5-material\\geckodriver024win64.exe";
 
 //	// Path Emilio
-//	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-//	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\"
-//			+ "PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
+	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\"
+			+ "PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
 
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URL = "http://localhost:8090";

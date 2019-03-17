@@ -36,13 +36,13 @@ public class User {
 	private Role role;
 	private boolean active;
 
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(mappedBy = "owner", orphanRemoval=true)
 	private Set<Sale> publishedSales = new HashSet<>();
 
 	@OneToMany(mappedBy = "buyer")
 	private Set<Sale> boughtSales = new HashSet<>();
 
-	@OneToMany(mappedBy = "sender")
+	@OneToMany(mappedBy = "sender", orphanRemoval=true)
 	private Set<Message> sentMessages = new HashSet<>();
 
 	@OneToMany(mappedBy = "customer")
