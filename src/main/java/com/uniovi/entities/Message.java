@@ -14,23 +14,23 @@ public class Message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
 	private User sender;
-	
+
 	@ManyToOne
 	private Conversation belongs;
-	
+
 	private String body;
-	
+
 	private LocalDateTime date;
-	
+
 	private boolean valid;
-	
+
 	public Message() {
 		this.valid = true;
 	}
-	
+
 	public Message(User user, String body) {
 		this();
 		setSender(user);
@@ -45,9 +45,6 @@ public class Message {
 	public void setSender(User sender) {
 		this.sender = sender;
 	}
-
-
-	
 
 	public String getBody() {
 		return body;
@@ -76,7 +73,7 @@ public class Message {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setBelongs(Conversation conversation) {
 		this.belongs = conversation;
 	}
@@ -108,8 +105,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", sender=" + sender + ", "
-				 +  ", body="
+		return "Message [id=" + id + ", sender=" + sender + ", " + ", body="
 				+ body + ", date=" + date + ", valid=" + valid + "]";
 	}
 }

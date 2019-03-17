@@ -31,7 +31,7 @@
                     <td th:text="${sale.title}">Column content</td>
                     <td th:text="${sale.details}">Column content</td>
                     <td th:text="${sale.price}">Column content</td>
-                    <td><a th:href="${'/sales/message/' + sale.id}" th:text="#{sales.message}">enviar mensaje</a></td>
+                    <td><a class="sendMessage" th:href="${'/sales/message/' + sale.id}" th:text="#{sales.message}">enviar mensaje</a></td>
                     <td>
                         <form method="get" th:attr="action=${'/sales/buy/' + sale.id}">
                             <input type="submit" class="btn btn-success" th:attr="value=#{sales.buy}"/>

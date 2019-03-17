@@ -34,10 +34,9 @@ public class User {
 
 	@OneToMany(mappedBy = "sender")
 	private Set<Message> sentMessages = new HashSet<>();
-	
+
 	@OneToMany(mappedBy = "customer")
 	private Set<Conversation> participates = new HashSet<>();
-
 
 	public User() {
 		setActive(true);
@@ -177,13 +176,12 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", surname=" 
-				+ surname + ", email=" + email + ", password="
-				+ password + ", repassword=" + repassword + 
-				", money=" + money + ", role=" + role + ", active=" + active
-				+ ", publishedSales=" + publishedSales + ", boughtSales=" 
-				+ boughtSales + ", sentMessages="
-				+ sentMessages + "]";
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname
+				+ ", email=" + email + ", password=" + password
+				+ ", repassword=" + repassword + ", money=" + money + ", role="
+				+ role + ", active=" + active + ", publishedSales="
+				+ publishedSales + ", boughtSales=" + boughtSales
+				+ ", sentMessages=" + sentMessages + "]";
 	}
 
 	public Set<Conversation> getParticipates() {

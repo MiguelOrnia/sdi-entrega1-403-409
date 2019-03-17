@@ -32,13 +32,13 @@ public class UsersService {
 	public List<User> getValidUsers() {
 		List<User> users = new ArrayList<User>();
 		for (User user : usersRepository.findAllActive()) {
-			if(user.isActive()) {
+			if (user.isActive()) {
 				users.add(user);
 			}
 		}
 		return users;
 	}
-	
+
 	public User getUser(Long id) {
 		return usersRepository.findById(id).get();
 	}

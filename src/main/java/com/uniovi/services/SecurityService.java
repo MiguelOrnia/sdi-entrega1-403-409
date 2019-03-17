@@ -34,8 +34,7 @@ public class SecurityService {
 	public void autoLogin(String email, String password) {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-		UsernamePasswordAuthenticationToken aToken = 
-				new UsernamePasswordAuthenticationToken(
+		UsernamePasswordAuthenticationToken aToken = new UsernamePasswordAuthenticationToken(
 				userDetails, password, userDetails.getAuthorities());
 		authenticationManager.authenticate(aToken);
 		if (aToken.isAuthenticated()) {

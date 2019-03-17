@@ -9,8 +9,9 @@ import com.uniovi.entities.User;
 public interface UsersRepository extends JpaRepository<User, Long> {
 
 	User findByEmail(String email);
+
 	User findByName(String name);
-	
+
 	@Query("SELECT u FROM User u WHERE u.active = true "
 			+ "AND u.role != 'ROLE_ADMIN'")
 	List<User> findAllActive();

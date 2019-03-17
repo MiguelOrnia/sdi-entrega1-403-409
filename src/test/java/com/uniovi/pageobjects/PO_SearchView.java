@@ -37,4 +37,15 @@ public class PO_SearchView extends PO_View {
 				getTimeout());
 		elementos.get(0).click();
 	}
+
+	public static void sendMessageToSale(WebDriver driver, String title) {
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver,
+				"free",
+				String.format(
+						"//td[contains(text(), '%s')]/following-sibling::*[3]",
+						title),
+				getTimeout());
+		elementos.get(0).click();
+	}
+
 }

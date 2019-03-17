@@ -24,8 +24,7 @@ public class Conversation {
 	@ManyToOne
 	private User customer;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "belongs", 
-			cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "belongs", cascade = CascadeType.ALL)
 	private Set<Message> messages = new HashSet<>();
 
 	@ManyToOne
