@@ -6,8 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.uniovi.utils.SeleniumUtils;
-
 public class PO_Messages extends PO_View {
 
 	public static void goToPage(WebDriver driver) {

@@ -26,7 +26,18 @@ import com.uniovi.entities.Sale;
 import com.uniovi.entities.User;
 import com.uniovi.entities.types.Role;
 import com.uniovi.entities.types.SaleStatus;
-import com.uniovi.pageobjects.*;
+import com.uniovi.pageobjects.PO_AddSale;
+import com.uniovi.pageobjects.PO_BoughtView;
+import com.uniovi.pageobjects.PO_HomeView;
+import com.uniovi.pageobjects.PO_LoginView;
+import com.uniovi.pageobjects.PO_Messages;
+import com.uniovi.pageobjects.PO_MySales;
+import com.uniovi.pageobjects.PO_NavView;
+import com.uniovi.pageobjects.PO_Properties;
+import com.uniovi.pageobjects.PO_RegisterView;
+import com.uniovi.pageobjects.PO_SearchView;
+import com.uniovi.pageobjects.PO_UserList;
+import com.uniovi.pageobjects.PO_View;
 import com.uniovi.repositories.ConversationsRepository;
 import com.uniovi.repositories.MessagesRepository;
 import com.uniovi.repositories.SaleRepository;
@@ -63,14 +74,14 @@ public class SdiEntrega1403409ApplicationTests {
 	private ConversationsRepository conversationsRepository;
 
 	// Path Miguel
-	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\"
-			+ "PL-SDI-Sesion5-material\\geckodriver024win64.exe";
+//	static String PathFirefox65 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+//	static String Geckdriver024 = "C:\\Users\\Miguel\\Desktop\\"
+//			+ "PL-SDI-Sesion5-material\\geckodriver024win64.exe";
 
 //	// Path Emilio
-//	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-//	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\"
-//			+ "PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
+	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+	static String Geckdriver024 = "C:\\Users\\Emilio\\Documents\\SDI\\"
+			+ "PL-SDI-Sesión5-material\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
 
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URL = "http://localhost:8090";
@@ -837,16 +848,107 @@ public class SdiEntrega1403409ApplicationTests {
 //				PO_Properties.getSPANISH());
 //	}
 	
-		/**
-		 * Sobre una búsqueda determinada de ofertas (a elección de desarrollador), 
-		 * enviar un mensaje a una oferta concreta. Se abriría dicha conversación por primera vez.
-		 * Comprobar que el mensaje aparece en el listado de mensajes.
-		 */
-		@Test
-		public void PR31() {
-			PO_LoginView.fillForm(driver, "miguel@email.com", "password");
-			PO_SearchView.goToPage(driver);
-		}
+	/**
+	 * Sobre una búsqueda determinada de ofertas (a elección de desarrollador),
+	 * enviar un mensaje a una oferta concreta. Se abriría dicha conversación
+	 * por primera vez. Comprobar que el mensaje aparece en el listado de
+	 * mensajes.
+	 */
+	@Test
+	public void PR31() {
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		PO_SearchView.goToPage(driver);
+		// Realizo una búsqueda de ofertas
+		PO_SearchView.searchForSale(driver, "Consola");
+		// Inicio una nueva conversación con la primera oferta
+		PO_SearchView.sendMessageToSale(driver, "Consola");
+		// Envío un mensaje en la conversación
+		PO_Messages.sendMessage(driver, "Hola");
+		List<WebElement> elementos = PO_Messages.checkElement(driver, "class",
+				"sent");
+		// Compruebo que tan solo hay un mensaje enviado en la conversación
+		assertTrue(elementos.size() == 1);
+
+	}
+
+	/**
+	 * Sobre el listado de conversaciones enviar un mensaje a una conversación
+	 * ya abierta. Comprobar que el mensaje aparece en la lista de mensajes.
+	 */
+	@Test
+	public void PR32() {
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		PO_Messages.goToPage(driver);
+		// Vamos al chat con id 17
+		PO_Messages.goToChat(driver, "17");
+		List<WebElement> elementos = PO_Messages.checkElement(driver, "class",
+				"sent");
+		// Compruebo que ya había dos mensajes enviados en la conversación
+		assertTrue(elementos.size() == 2);
+		PO_Messages.sendMessage(driver, "Hola");
+		// Compruebo que ahora hay un mensaje más enviado en la conversación
+		elementos = PO_Messages.checkElement(driver, "class", "sent");
+		assertTrue(elementos.size() == 3);
+	}
+
+	/**
+	 * Mostrar el listado de conversaciones ya abiertas. Comprobar que el
+	 * listado contiene las conversaciones que deben ser.
+	 */
+	@Test
+	public void PR33() {
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		PO_Messages.goToPage(driver);
+		List<WebElement> elementos = PO_Messages.checkElement(driver, "class",
+				"chatCard");
+		// Compruebo que tiene un chat por cada oferta de los otros usuarios (5)
+		// y otro chat por su propia oferta
+		assertTrue(elementos.size() == 6);
+	}
+
+	/**
+	 * Sobre el listado de conversaciones ya abiertas. Pinchar el enlace
+	 * Eliminar de la primera y comprobar que el listado se actualiza
+	 * correctamente.
+	 */
+	@Test
+	public void PR34() {
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		PO_Messages.goToPage(driver);
+		List<WebElement> elementos = PO_Messages.checkElement(driver, "class",
+				"chatCard");
+		// Compruebo que tiene un chat por cada oferta de los otros usuarios (5)
+		// y otro chat por su propia oferta
+		assertTrue(elementos.size() == 6);
+		// Elimino el primer mensaje
+		PO_Messages.deleteFirstMessage(driver);
+		// Compruebo que hay una conversación menos
+		elementos = PO_Messages.checkElement(driver, "class",
+				"chatCard");
+		assertTrue(elementos.size() == 5);
+	}
+
+	/**
+	 * Sobre el listado de conversaciones ya abiertas. Pinchar el enlace
+	 * Eliminar de la última y comprobar que el listado se actualiza
+	 * correctamente.
+	 */
+	@Test
+	public void PR35() {
+		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
+		PO_Messages.goToPage(driver);
+		List<WebElement> elementos = PO_Messages.checkElement(driver, "class",
+				"chatCard");
+		// Compruebo que tiene un chat por cada oferta de los otros usuarios (5)
+		// y otro chat por su propia oferta
+		assertTrue(elementos.size() == 6);
+		// Elimino el primer mensaje
+		PO_Messages.deleteLastMessage(driver);
+		// Compruebo que hay una conversación menos
+		elementos = PO_Messages.checkElement(driver, "class",
+				"chatCard");
+		assertTrue(elementos.size() == 5);
+	}
 	
 	
 }

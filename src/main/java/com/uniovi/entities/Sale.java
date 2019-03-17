@@ -2,7 +2,15 @@ package com.uniovi.entities;
 
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import org.joda.time.LocalDateTime;
 
 import com.uniovi.entities.types.SaleStatus;

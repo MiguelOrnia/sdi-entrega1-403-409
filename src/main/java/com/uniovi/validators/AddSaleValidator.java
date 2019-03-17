@@ -1,9 +1,11 @@
 package com.uniovi.validators;
 
+import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import com.uniovi.entities.Sale;
 import com.uniovi.entities.User;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.*;
 
 @Component
 public class AddSaleValidator implements Validator {
