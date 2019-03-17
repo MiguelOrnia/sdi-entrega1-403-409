@@ -28,7 +28,7 @@ public class PO_SearchView extends PO_View {
 		btnSearch.get(0).click();
 	}
 
-	public static void buyOffer(WebDriver driver, String title) {
+	public static void buySale(WebDriver driver, String title) {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver,
 				"free",
 				String.format(

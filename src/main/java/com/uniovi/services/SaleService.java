@@ -42,8 +42,8 @@ public class SaleService {
 	}
 
 	public Page<Sale> findToSellSearchText(Pageable pageable,
-			String searchText) {
-		return saleRepository.findToSellSearchText(pageable, searchText);
+			String searchText, Long id) {
+		return saleRepository.findToSellSearchText(pageable, searchText, id);
 	}
 
 	public Sale getSaleById(Long id) {

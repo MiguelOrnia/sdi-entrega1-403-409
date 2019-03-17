@@ -31,10 +31,13 @@
                     <td th:text="${sale.title}">Column content</td>
                     <td th:text="${sale.details}">Column content</td>
                     <td th:text="${sale.price}">Column content</td>
-                    <td><a class="sendMessage" th:href="${'/sales/message/' + sale.id}" th:text="#{sales.message}">enviar mensaje</a></td>
+                    <td><a th:if="${sale.getOnSale()}" class="sendMessage" th:href="${'/sales/message/' + sale.id}" th:text="#{sales.message}">enviar mensaje</a></td>
                     <td>
                         <form method="get" th:attr="action=${'/sales/buy/' + sale.id}">
-                            <input type="submit" class="btn btn-success" th:attr="value=#{sales.buy}"/>
+                            <input type="submit" th:if="${sale.getOnSale()}" 
+                            	class="btn btn-success" th:attr="value=#{sales.buy}"/>
+                            <span th:if="${sale.getSold()}" 
+                            	th:text="#{sale.list.sold}" class="badge badge-primary"></span>
                             <div id="buyError" th:if="${error!=null && error.equals(sale.Id)}" th:text=#{sale.buy.error}
 								class="alert alert-danger" role="alert">Buy error</div>
 							<div id="buySuccess" th:if="${success}!=null" th:text=#{sale.buy.success}

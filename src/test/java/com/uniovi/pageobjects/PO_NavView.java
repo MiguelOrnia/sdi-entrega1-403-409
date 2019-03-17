@@ -55,11 +55,101 @@ public class PO_NavView extends PO_View {
 		assertTrue(elementos.size() == 2);
 	}
 
-	static public void checkChangeIdiom(WebDriver driver, String textIdiom1,
+	static public void checkChangeIdiomUser(WebDriver driver, String textIdiom1,
 			String textIdiom2, int locale1, int locale2) {
+		List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.home", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.add", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.list", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.search", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.bought", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("messages.title", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("logout.message", locale1), getTimeout());
 		// Cambiamos a segundo idioma
 		PO_NavView.changeIdiom(driver, textIdiom2);
+		elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.home", locale2), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales", locale2), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.add", locale2), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.list", locale2), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.search", locale2), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.bought", locale2), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("messages.title", locale2), getTimeout());
 		// Volvemos a Español.
 		PO_NavView.changeIdiom(driver, textIdiom1);
+		elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.home", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.add", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.list", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.search", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.manage.sales.bought", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("messages.title", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("logout.message", locale1), getTimeout());
+	}
+
+	static public void checkChangeIdiomAdmin(WebDriver driver,
+			String textIdiom1, String textIdiom2, int locale1, int locale2) {
+		List<WebElement> elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("messages.title", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("logout.message", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.list.users", locale1), getTimeout());
+		// Cambiamos a segundo idioma
+		PO_NavView.changeIdiom(driver, textIdiom2);
+		elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("messages.title", locale2), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("logout.message", locale2), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.list.users", locale2), getTimeout());
+		// Volvemos a Español.
+		PO_NavView.changeIdiom(driver, textIdiom1);
+		elementos = PO_View.checkElement(driver, "free",
+				"//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("messages.title", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("logout.message", locale1), getTimeout());
+		SeleniumUtils.EsperaCargaPagina(driver, "text",
+				p.getString("nav.list.users", locale1), getTimeout());
 	}
 }

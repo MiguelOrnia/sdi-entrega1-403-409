@@ -178,7 +178,7 @@ public class SdiEntrega1403409ApplicationTests {
 
 		Sale s12 = new Sale("Vendo Cosa Random 1", "En perfecto estado",
 				4560.2);
-		Sale s22 = new Sale("Vendo Cosa Random 2", "Con arañazos", 120);
+		Sale s22 = new Sale("Vendo Cosa Random 2", "Con arañazos", 100);
 		Sale s32 = new Sale("Vendo Cosa Random 3", "En perfecto estado", 80);
 		saleService.addSale(s12, user2);
 		saleService.addSale(s22, user2);
@@ -693,7 +693,15 @@ public class SdiEntrega1403409ApplicationTests {
 
 		// Nos dirigimos a la lista de nuestras Ofertas
 		PO_MySales.goToPage(driver);
-
+		
+		SeleniumUtils.textoPresentePagina(driver, "Coche");
+		SeleniumUtils.textoPresentePagina(driver, "Botella");
+		SeleniumUtils.textoPresentePagina(driver, "Casa");
+		SeleniumUtils.textoPresentePagina(driver, "Boligrafo");
+		SeleniumUtils.textoPresentePagina(driver, "Ordenador");
+		SeleniumUtils.textoPresentePagina(driver, "Vendo Ford Fiesta");
+		SeleniumUtils.textoPresentePagina(driver, "Vendo iPhone 4");
+		SeleniumUtils.textoPresentePagina(driver, "Calculadora");
 	}
 
 	/**
@@ -757,9 +765,9 @@ public class SdiEntrega1403409ApplicationTests {
 		assertTrue(sale.size() == 5);
 		SeleniumUtils.textoPresentePagina(driver, "Consola");
 		SeleniumUtils.textoPresentePagina(driver, "Raton");
-		SeleniumUtils.textoPresentePagina(driver, "Vendo Cosa Random 1");
-		SeleniumUtils.textoPresentePagina(driver, "Vendo Cosa Random 2");
-		SeleniumUtils.textoPresentePagina(driver, "Vendo Cosa Random 3");
+		SeleniumUtils.textoPresentePagina(driver, "Joya");
+		SeleniumUtils.textoPresentePagina(driver, "Gafas");
+		SeleniumUtils.textoPresentePagina(driver, "Caña de Pescar");
 	}
 
 	/**
@@ -778,6 +786,9 @@ public class SdiEntrega1403409ApplicationTests {
 		// Comprobar las ofertas
 		SeleniumUtils.textoNoPresentePagina(driver, "Consola");
 		SeleniumUtils.textoNoPresentePagina(driver, "Raton");
+		SeleniumUtils.textoNoPresentePagina(driver, "Joya");
+		SeleniumUtils.textoNoPresentePagina(driver, "Gafas");
+		SeleniumUtils.textoNoPresentePagina(driver, "Caña de Pescar");
 	}
 
 	/**
@@ -794,7 +805,7 @@ public class SdiEntrega1403409ApplicationTests {
 		// Buscar
 		PO_SearchView.searchForSale(driver, "Raton");
 		// Comprar la oferta
-		PO_SearchView.buyOffer(driver, "Raton");
+		PO_SearchView.buySale(driver, "Raton");
 		// Comprobar balance
 		PO_HomeView.goToPage(driver);
 		double balance = PO_HomeView.getUserBalance(driver);
@@ -814,9 +825,9 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_LoginView.fillForm(driver, "miguel@email.com", "password");
 		PO_SearchView.goToPage(driver);
 		// Buscar
-		PO_SearchView.searchForSale(driver, "Coche");
+		PO_SearchView.searchForSale(driver, "Vendo Cosa Random 2");
 		// Comprar la oferta
-		PO_SearchView.buyOffer(driver, "Coche");
+		PO_SearchView.buySale(driver, "Vendo Cosa Random 2");
 		// Comprobar balance
 		PO_HomeView.goToPage(driver);
 		double balance = PO_HomeView.getUserBalance(driver);
@@ -837,7 +848,7 @@ public class SdiEntrega1403409ApplicationTests {
 		// Buscar
 		PO_SearchView.searchForSale(driver, "Consola");
 		// Comprar la oferta
-		PO_SearchView.buyOffer(driver, "Consola");
+		PO_SearchView.buySale(driver, "Consola");
 		// Comprobar balance
 		PO_HomeView.checkKey(driver, "sale.buy.error",
 				PO_Properties.getSPANISH());
@@ -867,8 +878,9 @@ public class SdiEntrega1403409ApplicationTests {
 		PO_HomeView.goToPage(driver);
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
 				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
-		PO_NavView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
+		PO_NavView.checkChangeIdiomUser(driver, "btnSpanish", "btnEnglish",
 				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+		PO_HomeView.goToPage(driver);
 		PO_AddSale.goToPage(driver);
 		PO_AddSale.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
 				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
@@ -877,6 +889,9 @@ public class SdiEntrega1403409ApplicationTests {
 				"//li[contains(@id, 'desconexion')]/a");
 		elementos.get(0).click();
 		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_NavView.checkChangeIdiomAdmin(driver, "btnSpanish", "btnEnglish",
+				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+		PO_HomeView.goToPage(driver);
 		PO_UserList.goToPage(driver);
 		PO_UserList.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
 				PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
@@ -913,11 +928,10 @@ public class SdiEntrega1403409ApplicationTests {
 
 	/**
 	 * PR30. Estando autenticado como usuario estándar intentar acceder a la
-	 * opción
-	 * de listado de usuarios del administrador. Se deberá indicar un mensaje de
-	 * acción prohibida.
+	 * opción de listado de usuarios del administrador. Se deberá indicar un
+	 * mensaje de acción prohibida.
 	 */
-	
+
 	@Test
 	public void PR30() {
 		// Rellenamos el formulario

@@ -52,16 +52,12 @@ public class PO_AddSale extends PO_View {
 				p.getString("sales.add.submit", locale1), getTimeout());
 		// Cambiamos a segundo idioma
 		PO_NavView.changeIdiom(driver, textIdiom2);
-//		SeleniumUtils.EsperaCargaPagina(driver, "text",
-//				p.getString("sales.add.add", locale2), getTimeout());
 		SeleniumUtils.EsperaCargaPagina(driver, "text",
 				p.getString("sales.title", locale2), getTimeout());
 		SeleniumUtils.EsperaCargaPagina(driver, "text",
 				p.getString("sales.details", locale2), getTimeout());
 		SeleniumUtils.EsperaCargaPagina(driver, "text",
 				p.getString("sales.price", locale2), getTimeout());
-//		SeleniumUtils.EsperaCargaPagina(driver, "text",
-//				p.getString("sales.add.submit", locale2), getTimeout());
 		// Volvemos a Español.
 		PO_NavView.changeIdiom(driver, textIdiom1);
 		SeleniumUtils.EsperaCargaPagina(driver, "text",

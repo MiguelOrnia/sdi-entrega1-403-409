@@ -17,13 +17,17 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 	List<Sale> findAllByUser(User user);
 
 	@Query("SELECT s FROM Sale s WHERE (s.status ='ONSALE' OR "
-			+ "s.status='HIGHLIGHTED') AND s.owner.id != ?1 AND s.active = true")
+			+ "s.status='HIGHLIGHTED' OR s.status ='SOLD') "
+			+ "AND s.owner.id != ?1 AND s.active = true")
 	Page<Sale> findToSell(Pageable pageable, Long id);
 
 	@Query("SELECT s FROM Sale s WHERE s.title LIKE %?1% "
-			+ "AND s.status = 'HIGHLIGHTED' " + "OR s.title LIKE %?1% "
-			+ "AND s.status = 'ONSALE' AND s.active = true")
-	Page<Sale> findToSellSearchText(Pageable pageable, String searchText);
+			+ "AND s.status = 'HIGHLIGHTED' OR s.title LIKE %?1% "
+			+ "AND s.status = 'ONSALE'"
+			+ "AND s.status ='SOLD' OR s.title LIKE %?1% "
+			+ "AND s.owner.id != ?2 AND s.active = true")
+	Page<Sale> findToSellSearchText(Pageable pageable, String searchText,
+			Long id);
 
 	List<Sale> findByBuyerId(Long id);
 }

@@ -58,7 +58,6 @@ public class SaleController {
 		return "sales/add";
 	}
 
-
 	@RequestMapping("/sales/list")
 	public String listSales(Model model) {
 		Authentication auth = SecurityContextHolder.getContext()
@@ -81,7 +80,8 @@ public class SaleController {
 		String email = auth.getName();
 		User activeUser = usersService.getUserByEmail(email);
 		if (searchText != null && !searchText.isEmpty()) {
-			return saleService.findToSellSearchText(pageable, searchText);
+			return saleService.findToSellSearchText(pageable, searchText,
+					activeUser.getId());
 		}
 		return saleService.findToSell(pageable, activeUser.getId());
 	}

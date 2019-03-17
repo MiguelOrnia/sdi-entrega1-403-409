@@ -169,4 +169,11 @@ public class Sale {
 		this.conversations = conversations;
 	}
 
+	public boolean getOnSale() {
+		return this.status.equals(SaleStatus.ONSALE);
+	}
+	
+	public boolean getSold() {
+		return this.status.equals(SaleStatus.SOLD);
+	}
 }

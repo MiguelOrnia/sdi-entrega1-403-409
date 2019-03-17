@@ -33,8 +33,6 @@ public class PO_HomeView extends PO_NavView {
 				p.getString("home.authenticated", locale2), getTimeout());
 		SeleniumUtils.EsperaCargaPagina(driver, "text",
 				p.getString("home.money", locale2), getTimeout());
-//		SeleniumUtils.EsperaCargaPagina(driver, "text",
-//				p.getString("home.sales", locale2), getTimeout());
 		// Volvemos a Español.
 		PO_HomeView.changeIdiom(driver, textIdiom1);
 		// Esperamos a que se cargue el saludo de bienvenida en Español

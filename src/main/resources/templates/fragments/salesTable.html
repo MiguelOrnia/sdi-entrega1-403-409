@@ -1,16 +1,16 @@
 <div class="table-responsive">
 	<table class="table table-hover" th:fragment="tableSales"
 		id="tableSales">
-		<thead>
-			<tr>
+		<thead class="table-dark">
+			<tr class="text-center">
 				<th class="col-md-2" th:text="#{sales.title}">Titulo</th>
 				<th th:text="#{sales.details}">Detalles</th>
 				<th class="col-md-2" th:text="#{sales.price}">Precio</th>
 				<th class="col-md-1"></th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr th:each="sale : ${salesList}">
+		<tbody class="table-light">
+			<tr class="text-center" th:each="sale : ${salesList}">
 				<td th:text="${sale.title}">1</td>
 				<td th:text="${sale.details}">Ejercicio 1</td>
 				<td th:text="${sale.price} + '€'">10</td>
